@@ -1,0 +1,12 @@
+endpoint: https://us1.prisma.sh/ryan-doyle/thermofisher-inventory/dev
+datamodel: datamodel.prisma
+secret: drinkingPhilzCoffee
+
+generate:
+  - generator: javascript-client
+    output: ./generated/prisma-client/
+  - generator: graphql-schema
+    output: ./generated
+hooks:
+  post-deploy:
+    - prisma generate

@@ -1,0 +1,97 @@
+# import * from "../generated/prisma.graphql"
+
+# These define the client side schema for data inputs.  These types are used to collect inputs and then resolved in the resolvers
+type Query {
+  user(id: ID!): User
+}
+
+type Mutation {
+  createUser(
+    name: String!
+    email: String!
+    password: String!
+    resetToken: String
+    resetTokenExpiry: Float
+    permissions: UserCreatepermissionsInput
+  ): User!
+
+  createPart(
+    partNumber: String!
+    arabicLong_ar_sa: String
+    arabicShort_ar_sa: String
+    bulgarianLong_bg: String
+    bulgarianShort_bg: String
+    catlanLong_ca: String
+    catlanShort_ca: String
+    chineseLong_zh_cn: String
+    chineseShort_zh_cn: String
+    chineseTLong_zh_tw: String
+    chineseTShort_zh_tw: String
+    croatianLong_hr: String
+    croatianShort_hr: String
+    czechLong_cs: String
+    czechShort_cs: String
+    danishLong_da: String
+    danishShort_da: String
+    dutchLong_nl: String
+    dutchShort_nl: String
+    englishLong_en: String
+    englishShort_en: String
+    extonianLong_et: String
+    extonianShort_et: String
+    finnishLong_fi: String
+    finnishShort_fi: String
+    frenchLong_fr: String
+    frenchShort_fr: String
+    germanLong_de: String
+    germanShort_de: String
+    greekLong_el: String
+    greekShort_el: String
+    hebrewLong_he: String
+    hebrewShort_he: String
+    hungarianLong_hu: String
+    hungarianShort_hu: String
+    icelandicLong_is: String
+    icelandicShort_is: String
+    indonesianLong_id: String
+    indonesianShort_id: String
+    italianLong_it: String
+    italianShort_it: String
+    japaneseLong_ja: String
+    japaneseShort_ja: String
+    koreanLong_ko: String
+    koreanShort_ko: String
+    latvianLong_lv: String
+    latvianShort_lv: String
+    lithuanianLong_lt: String
+    lithuanianShort_lt: String
+    malaysianLong_ms: String
+    malaysianShort_ms: String
+    norwegianLong_no: String
+    norwegianShort_no: String
+    polishLong_po: String
+    polishShort_po: String
+    portugeseLong_pt: String
+    portugeseShort_pt: String
+    romanianLong_ro: String
+    romanianShort_ro: String
+    russianLong_ru: String
+    russianShort_ru: String
+    serbianLong_sr: String
+    serbianShort_sr: String
+    slovakLong_sk: String
+    slovakShort_sk: String
+    slovenianLong_sl: String
+    slovenianShort_sl: String
+    spanishLong_es: String
+    spanishShort_es: String
+    swedishLong_sv: String
+    swedishShort_sv: String
+    thaiLong_th: String
+    thaiShort_th: String
+    turkishLong_tr: String
+    turkishShort_tr: String
+    ukranianLong_uk: String
+    ukranianShort_uk: String
+  ): Part!
+}

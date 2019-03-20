@@ -1,0 +1,19 @@
+{
+  "name": "thermo-fisher-backend",
+  "version": "1.0.0",
+  "description": "Inventory backend management of part items and descriptions in html output",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "Ryan M Doyle",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.4.8",
+    "bcryptjs": "^2.4.3",
+    "graphql-import": "^0.7.1",
+    "nodemon": "^1.18.10",
+    "prisma-binding": "^2.3.9"
+  }
+}
