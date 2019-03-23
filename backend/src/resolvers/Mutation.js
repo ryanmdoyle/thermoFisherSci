@@ -15,6 +15,13 @@ const Mutations = {
       }
     }, info);
     return user;
+  },
+
+  async createPart(parent, args, context, info) {
+    const part = await context.db.mutation.createPart({
+      data: { ...args }
+    }, info);
+    return part;
   }
 }
 

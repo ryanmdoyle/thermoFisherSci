@@ -54,6 +54,7 @@ type Part {
   partNumber: String!
   arabicLong_ar_sa: String
   arabicShort_ar_sa: String
+  arabicEdits: String
   bulgarianLong_bg: String
   bulgarianShort_bg: String
   catlanLong_ca: String
@@ -140,6 +141,7 @@ input PartCreateInput {
   partNumber: String!
   arabicLong_ar_sa: String
   arabicShort_ar_sa: String
+  arabicEdits: String
   bulgarianLong_bg: String
   bulgarianShort_bg: String
   catlanLong_ca: String
@@ -230,6 +232,8 @@ enum PartOrderByInput {
   arabicLong_ar_sa_DESC
   arabicShort_ar_sa_ASC
   arabicShort_ar_sa_DESC
+  arabicEdits_ASC
+  arabicEdits_DESC
   bulgarianLong_bg_ASC
   bulgarianLong_bg_DESC
   bulgarianShort_bg_ASC
@@ -389,6 +393,7 @@ type PartPreviousValues {
   partNumber: String!
   arabicLong_ar_sa: String
   arabicShort_ar_sa: String
+  arabicEdits: String
   bulgarianLong_bg: String
   bulgarianShort_bg: String
   catlanLong_ca: String
@@ -487,6 +492,7 @@ input PartUpdateInput {
   partNumber: String
   arabicLong_ar_sa: String
   arabicShort_ar_sa: String
+  arabicEdits: String
   bulgarianLong_bg: String
   bulgarianShort_bg: String
   catlanLong_ca: String
@@ -567,6 +573,7 @@ input PartUpdateManyMutationInput {
   partNumber: String
   arabicLong_ar_sa: String
   arabicShort_ar_sa: String
+  arabicEdits: String
   bulgarianLong_bg: String
   bulgarianShort_bg: String
   catlanLong_ca: String
@@ -700,6 +707,20 @@ input PartWhereInput {
   arabicShort_ar_sa_not_starts_with: String
   arabicShort_ar_sa_ends_with: String
   arabicShort_ar_sa_not_ends_with: String
+  arabicEdits: String
+  arabicEdits_not: String
+  arabicEdits_in: [String!]
+  arabicEdits_not_in: [String!]
+  arabicEdits_lt: String
+  arabicEdits_lte: String
+  arabicEdits_gt: String
+  arabicEdits_gte: String
+  arabicEdits_contains: String
+  arabicEdits_not_contains: String
+  arabicEdits_starts_with: String
+  arabicEdits_not_starts_with: String
+  arabicEdits_ends_with: String
+  arabicEdits_not_ends_with: String
   bulgarianLong_bg: String
   bulgarianLong_bg_not: String
   bulgarianLong_bg_in: [String!]
@@ -1743,7 +1764,6 @@ input PartWhereInput {
 
 input PartWhereUniqueInput {
   id: ID
-  partNumber: String
 }
 
 enum Permission {

@@ -4,11 +4,7 @@ import Page from '../components/Page';
 
 const index = () => {
   return (
-    <div>
-      <Page>
-        <Home />
-      </Page>
-    </div>
+    <Home />
   );
 };
 

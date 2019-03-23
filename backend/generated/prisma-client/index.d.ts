@@ -164,6 +164,8 @@ export type PartOrderByInput =
   | "arabicLong_ar_sa_DESC"
   | "arabicShort_ar_sa_ASC"
   | "arabicShort_ar_sa_DESC"
+  | "arabicEdits_ASC"
+  | "arabicEdits_DESC"
   | "bulgarianLong_bg_ASC"
   | "bulgarianLong_bg_DESC"
   | "bulgarianShort_bg_ASC"
@@ -343,13 +345,13 @@ export interface UserCreatepermissionsInput {
 
 export type PartWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
-  partNumber?: String;
 }>;
 
 export interface PartUpdateManyMutationInput {
   partNumber?: String;
   arabicLong_ar_sa?: String;
   arabicShort_ar_sa?: String;
+  arabicEdits?: String;
   bulgarianLong_bg?: String;
   bulgarianShort_bg?: String;
   catlanLong_ca?: String;
@@ -439,6 +441,7 @@ export interface PartUpdateInput {
   partNumber?: String;
   arabicLong_ar_sa?: String;
   arabicShort_ar_sa?: String;
+  arabicEdits?: String;
   bulgarianLong_bg?: String;
   bulgarianShort_bg?: String;
   catlanLong_ca?: String;
@@ -528,6 +531,7 @@ export interface PartCreateInput {
   partNumber: String;
   arabicLong_ar_sa?: String;
   arabicShort_ar_sa?: String;
+  arabicEdits?: String;
   bulgarianLong_bg?: String;
   bulgarianShort_bg?: String;
   catlanLong_ca?: String;
@@ -661,6 +665,20 @@ export interface PartWhereInput {
   arabicShort_ar_sa_not_starts_with?: String;
   arabicShort_ar_sa_ends_with?: String;
   arabicShort_ar_sa_not_ends_with?: String;
+  arabicEdits?: String;
+  arabicEdits_not?: String;
+  arabicEdits_in?: String[] | String;
+  arabicEdits_not_in?: String[] | String;
+  arabicEdits_lt?: String;
+  arabicEdits_lte?: String;
+  arabicEdits_gt?: String;
+  arabicEdits_gte?: String;
+  arabicEdits_contains?: String;
+  arabicEdits_not_contains?: String;
+  arabicEdits_starts_with?: String;
+  arabicEdits_not_starts_with?: String;
+  arabicEdits_ends_with?: String;
+  arabicEdits_not_ends_with?: String;
   bulgarianLong_bg?: String;
   bulgarianLong_bg_not?: String;
   bulgarianLong_bg_in?: String[] | String;
@@ -2019,11 +2037,12 @@ export interface PartSubscriptionPayloadSubscription
   previousValues: <T = PartPreviousValuesSubscription>() => T;
 }
 
-export interface Part {
+export interface PartPreviousValues {
   id: ID_Output;
   partNumber: String;
   arabicLong_ar_sa?: String;
   arabicShort_ar_sa?: String;
+  arabicEdits?: String;
   bulgarianLong_bg?: String;
   bulgarianShort_bg?: String;
   catlanLong_ca?: String;
@@ -2100,11 +2119,14 @@ export interface Part {
   ukranianShort_uk?: String;
 }
 
-export interface PartPromise extends Promise<Part>, Fragmentable {
+export interface PartPreviousValuesPromise
+  extends Promise<PartPreviousValues>,
+    Fragmentable {
   id: () => Promise<ID_Output>;
   partNumber: () => Promise<String>;
   arabicLong_ar_sa: () => Promise<String>;
   arabicShort_ar_sa: () => Promise<String>;
+  arabicEdits: () => Promise<String>;
   bulgarianLong_bg: () => Promise<String>;
   bulgarianShort_bg: () => Promise<String>;
   catlanLong_ca: () => Promise<String>;
@@ -2181,13 +2203,14 @@ export interface PartPromise extends Promise<Part>, Fragmentable {
   ukranianShort_uk: () => Promise<String>;
 }
 
-export interface PartSubscription
-  extends Promise<AsyncIterator<Part>>,
+export interface PartPreviousValuesSubscription
+  extends Promise<AsyncIterator<PartPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   partNumber: () => Promise<AsyncIterator<String>>;
   arabicLong_ar_sa: () => Promise<AsyncIterator<String>>;
   arabicShort_ar_sa: () => Promise<AsyncIterator<String>>;
+  arabicEdits: () => Promise<AsyncIterator<String>>;
   bulgarianLong_bg: () => Promise<AsyncIterator<String>>;
   bulgarianShort_bg: () => Promise<AsyncIterator<String>>;
   catlanLong_ca: () => Promise<AsyncIterator<String>>;
@@ -2296,11 +2319,12 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface PartPreviousValues {
+export interface Part {
   id: ID_Output;
   partNumber: String;
   arabicLong_ar_sa?: String;
   arabicShort_ar_sa?: String;
+  arabicEdits?: String;
   bulgarianLong_bg?: String;
   bulgarianShort_bg?: String;
   catlanLong_ca?: String;
@@ -2377,13 +2401,12 @@ export interface PartPreviousValues {
   ukranianShort_uk?: String;
 }
 
-export interface PartPreviousValuesPromise
-  extends Promise<PartPreviousValues>,
-    Fragmentable {
+export interface PartPromise extends Promise<Part>, Fragmentable {
   id: () => Promise<ID_Output>;
   partNumber: () => Promise<String>;
   arabicLong_ar_sa: () => Promise<String>;
   arabicShort_ar_sa: () => Promise<String>;
+  arabicEdits: () => Promise<String>;
   bulgarianLong_bg: () => Promise<String>;
   bulgarianShort_bg: () => Promise<String>;
   catlanLong_ca: () => Promise<String>;
@@ -2460,13 +2483,14 @@ export interface PartPreviousValuesPromise
   ukranianShort_uk: () => Promise<String>;
 }
 
-export interface PartPreviousValuesSubscription
-  extends Promise<AsyncIterator<PartPreviousValues>>,
+export interface PartSubscription
+  extends Promise<AsyncIterator<Part>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   partNumber: () => Promise<AsyncIterator<String>>;
   arabicLong_ar_sa: () => Promise<AsyncIterator<String>>;
   arabicShort_ar_sa: () => Promise<AsyncIterator<String>>;
+  arabicEdits: () => Promise<AsyncIterator<String>>;
   bulgarianLong_bg: () => Promise<AsyncIterator<String>>;
   bulgarianShort_bg: () => Promise<AsyncIterator<String>>;
   catlanLong_ca: () => Promise<AsyncIterator<String>>;
@@ -2604,14 +2628,14 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
 */
 export type Float = number;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /**
  * Model Metadata
