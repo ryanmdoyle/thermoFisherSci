@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import styled from 'styled-components';
+
+const Form = styled.form`
+  label {
+    width: 100%;
+    display: block;
+  }
+  input {
+    margin-right: 100px;
+  }
+`;
 
 class CreatePart extends Component {
   state = {
@@ -37,7 +48,7 @@ class CreatePart extends Component {
   
   render() {
     return (
-      <form 
+      <Form 
         method='POST'
         onSubmit={
           async e => {
@@ -59,7 +70,7 @@ class CreatePart extends Component {
         </label>
         <label htmlFor='chineseLong_zh_cn'>
           chineseLong_zh_cn
-          <input
+          <textarea
             type='text'
             name='chineseLong_zh_cn'
             placeholder='chineseLong_zh_cn'
@@ -298,7 +309,7 @@ class CreatePart extends Component {
           />
         </label>
         <input type='submit' value='Create Part' />
-      </form>
+      </Form>
     );
   }
 }
