@@ -20,7 +20,7 @@ const CREATE_USER_MUTATION = gql`
   }
 `;
 
-class CreateUser extends Component {
+class CreateUserForm extends Component {
   state = {
     name: '',
     email: '',
@@ -88,4 +88,4 @@ class CreateUser extends Component {
   }
 }
 
-export default CreateUser;
+export default CreateUserForm;
