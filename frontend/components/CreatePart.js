@@ -7,9 +7,17 @@ const Form = styled.form`
   label {
     width: 100%;
     display: block;
+    margin: 10px 0 5px 0;
   }
-  input {
-    margin-right: 100px;
+  input, textarea {
+    height: 1.5rem;
+    width: 40%;
+    margin-right: 60%;
+    padding-left: 0.25rem;
+  }
+  .submit {
+    margin: 1rem auto;
+    width: 33%;
   }
 `;
 
@@ -39,27 +47,30 @@ class CreatePart extends Component {
     portugeseLong_pt: '',
     portugeseShort_pt: '',
     spanishLong_es: '',
-    spanishShort_es:'' 
+    spanishShort_es: ''
   };
 
   saveToState = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
-  
+
   render() {
     return (
-      <Form 
-        method='POST'
-        onSubmit={
-          async e => {
-            e.preventDefault();
-            console.log(this.state);
-            //this.setState({})
+      <React.Fragment>
+        <h1>Create a New Part</h1>
+        <Form
+          method='POST'
+          onSubmit={
+            async e => {
+              e.preventDefault();
+              console.log(this.state);
+              //this.setState({})
+            }
           }
-        }
-      >
-        <label htmlFor='partNumber'>
-          Part Number
+        >
+          <label htmlFor='partNumber'>
+            Part Number
+          </label>
           <input
             type='text'
             name='partNumber'
@@ -67,9 +78,9 @@ class CreatePart extends Component {
             value={this.state.partNumber}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='chineseLong_zh_cn'>
-          chineseLong_zh_cn
+          <label htmlFor='chineseLong_zh_cn'>
+            chineseLong_zh_cn
+          </label>
           <textarea
             type='text'
             name='chineseLong_zh_cn'
@@ -77,9 +88,9 @@ class CreatePart extends Component {
             value={this.state.chineseLong_zh_cn}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='chineseShort_zh_cn'>
-          chineseShort_zh_cn
+          <label htmlFor='chineseShort_zh_cn'>
+            chineseShort_zh_cn
+          </label>
           <input
             type='text'
             name='chineseShort_zh_cn'
@@ -87,9 +98,9 @@ class CreatePart extends Component {
             value={this.state.chineseShort_zh_cn}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='chineseTLong_zh_tw'>
-          chineseTLong_zh_tw
+          <label htmlFor='chineseTLong_zh_tw'>
+            chineseTLong_zh_tw
+          </label>
           <input
             type='text'
             name='chineseTLong_zh_tw'
@@ -97,9 +108,9 @@ class CreatePart extends Component {
             value={this.state.chineseTLong_zh_tw}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='chineseTShort_zh_tw'>
-          chineseTShort_zh_tw
+          <label htmlFor='chineseTShort_zh_tw'>
+            chineseTShort_zh_tw
+          </label>
           <input
             type='text'
             name='chineseTShort_zh_tw'
@@ -107,9 +118,9 @@ class CreatePart extends Component {
             value={this.state.chineseTShort_zh_tw}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='danishLong_da'>
-          danishLong_da
+          <label htmlFor='danishLong_da'>
+            danishLong_da
+          </label>
           <input
             type='text'
             name='danishLong_da'
@@ -117,9 +128,9 @@ class CreatePart extends Component {
             value={this.state.danishLong_da}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='danishShort_da'>
-          danishShort_da
+          <label htmlFor='danishShort_da'>
+            danishShort_da
+          </label>
           <input
             type='text'
             name='danishShort_da'
@@ -127,9 +138,9 @@ class CreatePart extends Component {
             value={this.state.danishShort_da}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='dutchLong_nl'>
-          dutchLong_nl
+          <label htmlFor='dutchLong_nl'>
+            dutchLong_nl
+          </label>
           <input
             type='text'
             name='dutchLong_nl'
@@ -137,9 +148,9 @@ class CreatePart extends Component {
             value={this.state.dutchLong_nl}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='dutchShort_nl'>
-          dutchShort_nl
+          <label htmlFor='dutchShort_nl'>
+            dutchShort_nl
+          </label>
           <input
             type='text'
             name='dutchShort_nl'
@@ -147,9 +158,9 @@ class CreatePart extends Component {
             value={this.state.dutchShort_nl}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='englishLong_en'>
-          englishLong_en
+          <label htmlFor='englishLong_en'>
+            englishLong_en
+          </label>
           <input
             type='text'
             name='englishLong_en'
@@ -157,9 +168,9 @@ class CreatePart extends Component {
             value={this.state.englishLong_en}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='englishShort_en'>
-          englishShort_en
+          <label htmlFor='englishShort_en'>
+            englishShort_en
+          </label>
           <input
             type='text'
             name='englishShort_en'
@@ -167,9 +178,9 @@ class CreatePart extends Component {
             value={this.state.englishShort_en}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='frenchLong_fr'>
-          frenchLong_fr
+          <label htmlFor='frenchLong_fr'>
+            frenchLong_fr
+          </label>
           <input
             type='text'
             name='frenchLong_fr'
@@ -177,9 +188,9 @@ class CreatePart extends Component {
             value={this.state.frenchLong_fr}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='frenchShort_fr'>
-          frenchShort_fr
+          <label htmlFor='frenchShort_fr'>
+            frenchShort_fr
+          </label>
           <input
             type='text'
             name='frenchShort_fr'
@@ -187,9 +198,9 @@ class CreatePart extends Component {
             value={this.state.frenchShort_fr}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='germanLong_de'>
-          germanLong_de
+          <label htmlFor='germanLong_de'>
+            germanLong_de
+          </label>
           <input
             type='text'
             name='germanLong_de'
@@ -197,9 +208,9 @@ class CreatePart extends Component {
             value={this.state.germanLong_de}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='germanShort_de'>
-          germanShort_de
+          <label htmlFor='germanShort_de'>
+            germanShort_de
+          </label>
           <input
             type='text'
             name='germanShort_de'
@@ -207,9 +218,9 @@ class CreatePart extends Component {
             value={this.state.germanShort_de}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='italianLong_it'>
-          italianLong_it
+          <label htmlFor='italianLong_it'>
+            italianLong_it
+          </label>
           <input
             type='text'
             name='italianLong_it'
@@ -217,9 +228,9 @@ class CreatePart extends Component {
             value={this.state.italianLong_it}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='italianShort_it'>
-          italianShort_it
+          <label htmlFor='italianShort_it'>
+            italianShort_it
+          </label>
           <input
             type='text'
             name='italianShort_it'
@@ -227,9 +238,9 @@ class CreatePart extends Component {
             value={this.state.italianShort_it}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='japaneseLong_ja'>
-          japaneseLong_ja
+          <label htmlFor='japaneseLong_ja'>
+            japaneseLong_ja
+          </label>
           <input
             type='text'
             name='japaneseLong_ja'
@@ -237,9 +248,9 @@ class CreatePart extends Component {
             value={this.state.japaneseLong_ja}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='japaneseShort_ja'>
-          japaneseShort_ja
+          <label htmlFor='japaneseShort_ja'>
+            japaneseShort_ja
+          </label>
           <input
             type='text'
             name='japaneseShort_ja'
@@ -247,9 +258,9 @@ class CreatePart extends Component {
             value={this.state.japaneseShort_ja}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='koreanLong_ko'>
-          koreanLong_ko
+          <label htmlFor='koreanLong_ko'>
+            koreanLong_ko
+          </label>
           <input
             type='text'
             name='koreanLong_ko'
@@ -257,9 +268,9 @@ class CreatePart extends Component {
             value={this.state.koreanLong_ko}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='koreanShort_ko'>
-          koreanShort_ko
+          <label htmlFor='koreanShort_ko'>
+            koreanShort_ko
+          </label>
           <input
             type='text'
             name='koreanShort_ko'
@@ -267,9 +278,9 @@ class CreatePart extends Component {
             value={this.state.koreanShort_ko}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='portugeseLong_pt'>
-          portugeseLong_pt
+          <label htmlFor='portugeseLong_pt'>
+            portugeseLong_pt
+          </label>
           <input
             type='text'
             name='portugeseLong_pt'
@@ -277,9 +288,9 @@ class CreatePart extends Component {
             value={this.state.portugeseLong_pt}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='portugeseShort_pt'>
-          portugeseShort_pt
+          <label htmlFor='portugeseShort_pt'>
+            portugeseShort_pt
+          </label>
           <input
             type='text'
             name='portugeseShort_pt'
@@ -287,9 +298,9 @@ class CreatePart extends Component {
             value={this.state.portugeseShort_pt}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='spanishLong_es'>
-          spanishLong_es
+          <label htmlFor='spanishLong_es'>
+            spanishLong_es
+          </label>
           <input
             type='text'
             name='spanishLong_es'
@@ -297,9 +308,9 @@ class CreatePart extends Component {
             value={this.state.spanishLong_es}
             onChange={this.saveToState}
           />
-        </label>
-        <label htmlFor='spanishShort_es'>
-          spanishShort_es
+          <label htmlFor='spanishShort_es'>
+            spanishShort_es
+          </label>
           <input
             type='text'
             name='spanishShort_es'
@@ -307,9 +318,9 @@ class CreatePart extends Component {
             value={this.state.spanishShort_es}
             onChange={this.saveToState}
           />
-        </label>
-        <input type='submit' value='Create Part' />
-      </Form>
+          <input className='submit' type='submit' value='Create Part' />
+        </Form>
+      </React.Fragment>
     );
   }
 }

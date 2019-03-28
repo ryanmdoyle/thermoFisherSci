@@ -15,7 +15,22 @@ const GlobalStyle = createGlobalStyle`
   html {
     margin: 0;
     background-color: white;
-    font-family: 'Helvetica';
+    font-family: "Helvetica","Roboto","Segoe UI","Arial","sans-serif";
+    font-size: 16px;
+    color: ${props => props.theme.black}
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+  }
+  h2 {
+    font-size: 2rem;
+    font-weight: 300;
+  }
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 100;
   }
 `;
 
@@ -29,6 +44,7 @@ const Inner = styled.div`
   margin: 0 auto;
   padding: 2rem;
 `;
+
 class Page extends Component {
   render() {
     return (
