@@ -1,26 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import styled from 'styled-components';
-
-const Form = styled.form`
-  label {
-    width: 100%;
-    display: block;
-    margin: 10px 0 5px 0;
-  }
-  input, textarea {
-    height: 1.5rem;
-    width: 40%;
-    margin-right: 60%;
-    padding-left: 0.25rem;
-  }
-  .submit {
-    margin: 1rem auto;
-    width: 33%;
-  }
-`;
-
+import FormStyle from './styles/FormStyle';
 class CreatePart extends Component {
   state = {
     partNumber: '',
@@ -58,7 +39,7 @@ class CreatePart extends Component {
     return (
       <React.Fragment>
         <h1>Create a New Part</h1>
-        <Form
+        <FormStyle
           method='POST'
           onSubmit={
             async e => {
@@ -318,8 +299,8 @@ class CreatePart extends Component {
             value={this.state.spanishShort_es}
             onChange={this.saveToState}
           />
-          <input className='submit' type='submit' value='Create Part' />
-        </Form>
+          <input className='submit-button' type='submit' value='Create Part' />
+        </FormStyle>
       </React.Fragment>
     );
   }
