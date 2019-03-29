@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Meta from '../components/Meta';
+import Header from './Header';
 
 const theme = {
   backgroundColor: '#FFFFFF',
   lightGrey: '#F3F3F3',
+  darkGrey: '#4A4A4A',
   black: '#333333',
   red: '#EE3033',
   blue: '#1D8AE7',
@@ -14,10 +16,16 @@ const theme = {
 const GlobalStyle = createGlobalStyle`
   html {
     margin: 0;
+    padding: 0;
     background-color: white;
     font-family: "Helvetica","Roboto","Segoe UI","Arial","sans-serif";
     font-size: 16px;
     color: ${props => props.theme.black}
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
   }
 
   h1 {
@@ -52,7 +60,7 @@ class Page extends Component {
         <StyledPage>
           <GlobalStyle />
           <Meta />
-          {/* Put Header with Nav here */}
+          <Header />
           <Inner>
             {this.props.children}
           </Inner>
