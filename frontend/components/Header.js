@@ -6,18 +6,24 @@ import Nav from './Nav';
 const Head = styled.nav`
   display: flex;
   width: 100vw;
-  height: 60px;
+  height: 40px;
   margin: 0;
   padding: 1rem;
-  background-color: ${props => props.theme.lightGrey};
+  background-color: ${props => props.theme.white};
   border-bottom: 1px solid ${props => props.theme.darkGrey};
+  img {
+    height: 35px;
+  }
 `
 
 class Header extends Component {
+
+  icon = (name) => fs.readFileSync(`./public/${name}`);
+
   render() {
     return (
       <Head>
-        <a>LOGO</a>
+        <img src='/static/tfs-logo-color.png' alt='logo'></img>
         <Nav />
       </Head>
     );

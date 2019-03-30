@@ -4,6 +4,10 @@ import styled from 'styled-components';
 
 const NavStyled = styled.nav`
   display: flex;
+  align-items: center;
+  a {
+    margin: 0 0.75rem;
+  }
 `
 
 class Nav extends Component {
@@ -14,7 +18,7 @@ class Nav extends Component {
         <a>Link 2</a>
         <a>Link 3</a>
         <a>Link 4</a>
-        <a>Link 5</a>
+        <a>Login</a>
       </NavStyled>
     );
   }
