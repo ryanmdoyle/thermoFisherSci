@@ -7,18 +7,24 @@ const NavStyled = styled.nav`
   align-items: center;
   a {
     margin: 0 0.75rem;
+    color: ${props => props.theme.black};
+    text-decoration: none;
   }
-`
+  a:hover {
+    color: ${props => props.theme.red};
+  }
+`;
 
 class Nav extends Component {
   render() {
     return (
       <NavStyled>
-        <a>Link 1</a>
-        <a>Link 2</a>
-        <a>Link 3</a>
-        <a>Link 4</a>
-        <a>Login</a>
+        <Link href='/signup'>
+          <a>Sign Up</a>
+        </Link>
+        <Link href='/login'>
+          <a>Login</a>
+        </Link>
       </NavStyled>
     );
   }

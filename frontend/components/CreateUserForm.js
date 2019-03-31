@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import Router from 'next/router';
-import { createSignalIfSupported } from 'apollo-link-http-common';
+import FormStyle from './styles/FormStyle';
 
 const CREATE_USER_MUTATION = gql`
   mutation CREATE_USER_MUTATION(
@@ -40,7 +39,7 @@ class CreateUserForm extends Component {
       >
         {(addUser, { error, loading }) => {
           return (
-            <form
+            <FormStyle
               method='POST'
               onSubmit={async e => {
                 e.preventDefault();
@@ -49,37 +48,34 @@ class CreateUserForm extends Component {
               }}
             >
               <label htmlFor='name'>
-                name
+                Name
                 <input
                   type='text'
                   name='name'
-                  placeholder='name'
                   value={this.state.name}
                   onChange={this.saveToState}
                 />
               </label>
               <label htmlFor='email'>
-                email
+                Email
                 <input
                   type='email'
                   name='email'
-                  placeholder='email'
                   value={this.state.email}
                   onChange={this.saveToState}
                 />
               </label>
               <label htmlFor='password'>
-                password
+                Password
                 <input
                   type='password'
                   name='password'
-                  placeholder='password'
                   value={this.state.password}
                   onChange={this.saveToState}
                 />
               </label>
-              <input type='submit' />
-            </form>
+              <input type='submit' className='submit-button' />
+            </FormStyle>
           )
         }}
       </Mutation>

@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     background-color: white;
     font-family: "Helvetica","Roboto","Segoe UI","Arial","sans-serif";
     font-size: 16px;
@@ -26,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
   }
 
   h1 {

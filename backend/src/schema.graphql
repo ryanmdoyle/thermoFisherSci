@@ -15,6 +15,11 @@ type Mutation {
     permissions: UserCreatepermissionsInput
   ): User!
 
+  loginUser(
+    email: String!
+    password: String!
+  ): User!
+
   createPart(
     partNumber: String!
     arabicLong_ar_sa: String

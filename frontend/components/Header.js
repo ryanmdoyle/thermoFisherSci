@@ -6,13 +6,15 @@ import Nav from './Nav';
 const Head = styled.nav`
   display: flex;
   width: 100vw;
-  height: 40px;
+  box-sizing: border-box;
+  padding: 0.75rem;
+  height: 60px;
   margin: 0;
-  padding: 1rem;
   background-color: ${props => props.theme.white};
   border-bottom: 1px solid ${props => props.theme.darkGrey};
   img {
     height: 35px;
+    margin: auto auto 0 0;;
   }
 `
 

@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const Mutations = {
   async createUser(parent, args, context, info) {
@@ -22,6 +23,26 @@ const Mutations = {
       data: { ...args }
     }, info);
     return part;
+  },
+
+  async loginUser(parent, { email, password }, context, info) {
+    const user = await context.db.query.user({ where: { email } });
+    if (!user) {
+      throw new Error(`No user found for ${email}`);
+    }
+
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) {
+      throw new Error('Invalid Password');
+    }
+
+    const token = await jwt.sign({ userId: user.id }, process.env.COOKIE_SECRET);
+    console.log(token);
+    context.response.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 21,
+    });
+    return user;
   }
 }
 

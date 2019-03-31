@@ -11,10 +11,15 @@
   "license": "MIT",
   "dependencies": {
     "apollo-server": "^2.4.8",
+    "apollo-server-express": "^2.4.8",
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.4",
     "graphql-import": "^0.7.1",
+    "graphql-yoga": "^1.17.4",
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^1.18.10",
-    "prisma": "^1.29.1",
+    "prisma": "^1.29.2",
     "prisma-binding": "^2.3.9",
     "prisma-cli": "^1.0.9"
   }

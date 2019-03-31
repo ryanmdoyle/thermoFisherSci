@@ -1,5 +1,17 @@
 import React, { Component } from 'react';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
 import FormStyle from './styles/FormStyle';
+
+const LOGIN_MUTATION = gql`
+  mutation LOGIN_MUTATION($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      id
+      name
+      email
+    }
+  }
+`;
 
 class LoginForm extends Component {
   state = {
@@ -13,32 +25,33 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <FormStyle
-        method='POST'
-        onSubmit={async e => {
-          e.preventDefault();
-          // add login here!
-          // await login();
-        }}
-      >
-        <label htmlFor='email'>email</label>
-        <input
-          type='email'
-          name='email'
-          placeholder='email'
-          value={this.state.email}
-          onChange={this.saveToState}
-        />
-        <label htmlFor='password'>password</label>
-        <input
-          type='password'
-          name='password'
-          placeholder='password'
-          value={this.state.password}
-          onChange={this.saveToState}
-        />
-        <input type='submit' className='submit-button' />
-      </FormStyle>
+      <Mutation mutation={LOGIN_MUTATION} variables={this.state}>
+        {(loginUser, { data }) => (
+          <FormStyle
+            method='POST'
+            onSubmit={async e => {
+              e.preventDefault();
+              await loginUser();
+            }}
+          >
+            <label htmlFor='email'>Email</label>
+            <input
+              type='email'
+              name='email'
+              value={this.state.email}
+              onChange={this.saveToState}
+            />
+            <label htmlFor='password'>Password</label>
+            <input
+              type='password'
+              name='password'
+              value={this.state.password}
+              onChange={this.saveToState}
+            />
+            <input type='submit' className='submit-button' />
+          </FormStyle>
+        )}
+      </Mutation>
     );
   }
 }
