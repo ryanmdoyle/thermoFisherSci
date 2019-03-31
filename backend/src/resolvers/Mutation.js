@@ -25,25 +25,24 @@ const Mutations = {
     return part;
   },
 
-  async loginUser(parent, { email, password }, context, info) {
-    const user = await context.db.query.user({ where: { email } });
+  async signin(parent, { email, password }, ctx, info) {
+    const user = await ctx.db.query.user({ where: { email: email } });
     if (!user) {
-      throw new Error(`No user found for ${email}`);
+      throw new Error(`No such user found for the email ${email}`);
     }
-
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) {
-      throw new Error('Invalid Password');
+      throw new Error(`password is not valid!`);
     }
+    const token = jwt.sign({ userId: user.id }, process.env.USER_SECRET);
 
-    const token = await jwt.sign({ userId: user.id }, process.env.COOKIE_SECRET);
-    console.log(token);
-    context.response.cookie('token', token, {
+    ctx.response.cookie('token', token, {
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 21,
+      maxAge: 1000 * 60 * 60 * 24 * 31,
     });
+    console.log(token);
     return user;
-  }
+  },
 }
 
 module.exports = Mutations;

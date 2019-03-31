@@ -41,7 +41,8 @@ server.express.use((req, res, next) => {
 server.start({ //start the GraphQL server
   cors: { // only allow from frontend server (frontend_url)
     credentials: true,
-    origin: process.env.FRONTEND_URL,
+    port: 4000,
+    origin: ['http://localhost:3000'],
   },
 }, postStart => { //callback once connection is created
   console.log(`🚀 Server now running on http://localhost:${postStart.port}`);

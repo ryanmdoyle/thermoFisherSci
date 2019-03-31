@@ -15,7 +15,7 @@ type Mutation {
     permissions: UserCreatepermissionsInput
   ): User!
 
-  loginUser(
+  signin(
     email: String!
     password: String!
   ): User!

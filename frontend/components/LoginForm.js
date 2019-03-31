@@ -5,7 +5,7 @@ import FormStyle from './styles/FormStyle';
 
 const LOGIN_MUTATION = gql`
   mutation LOGIN_MUTATION($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password) {
+    signin(email: $email, password: $password) {
       id
       name
       email
@@ -26,12 +26,12 @@ class LoginForm extends Component {
   render() {
     return (
       <Mutation mutation={LOGIN_MUTATION} variables={this.state}>
-        {(loginUser, { data }) => (
+        {(signin, { data, error, loading }) => (
           <FormStyle
             method='POST'
             onSubmit={async e => {
               e.preventDefault();
-              await loginUser();
+              await signin();
             }}
           >
             <label htmlFor='email'>Email</label>
