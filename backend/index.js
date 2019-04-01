@@ -1,10 +1,11 @@
-const { Prisma } = require('prisma-binding');
 const express = require('express');
+const { Prisma } = require('prisma-binding');
 const { ApolloServer } = require('apollo-server-express');
-const { GraphQLServer } = require('graphql-yoga');
+const graphqlHTTP = require('express-graphql');
 const { importSchema } = require('graphql-import');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 require('dotenv').config();
 
 const typeDefs = importSchema('./src/schema.graphql');
@@ -17,7 +18,7 @@ const db = new Prisma({
   secret: process.env.DB_SECRET
 });
 
-const server = new GraphQLServer({
+const server = new ApolloServer({
   typeDefs,
   resolvers: {
     Mutation,
@@ -26,9 +27,16 @@ const server = new GraphQLServer({
   context: req => ({ ...req, db })
 });
 
-server.express.use(cookieParser());
+const app = express();
 
-server.express.use((req, res, next) => {
+var corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  credentials: true // <-- REQUIRED backend setting
+};
+
+app.use(cors(corsOptions));
+app.use(cookieParser());
+app.use((req, res, next) => {
   const { token } = req.cookies;
   if (token) {
     const { userId } = jwt.verify(token, process.env.APP_SECRET);
@@ -38,12 +46,11 @@ server.express.use((req, res, next) => {
   next();
 });
 
-server.start({ //start the GraphQL server
-  cors: { // only allow from frontend server (frontend_url)
-    credentials: true,
-    port: 4000,
-    origin: ['http://localhost:3000'],
-  },
-}, postStart => { //callback once connection is created
-  console.log(`🚀 Server now running on http://localhost:${postStart.port}`);
-});
+server.applyMiddleware({
+  app,
+  path: '/'
+})
+
+app.listen({ port: 4000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+);

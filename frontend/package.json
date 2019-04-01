@@ -13,6 +13,9 @@
   "license": "MIT",
   "dependencies": {
     "apollo-boost": "^0.3.1",
+    "apollo-link": "^1.2.11",
+    "apollo-link-http": "^1.5.14",
+    "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "next": "^8.0.3",

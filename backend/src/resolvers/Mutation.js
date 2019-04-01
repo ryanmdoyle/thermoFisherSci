@@ -36,11 +36,11 @@ const Mutations = {
     }
     const token = jwt.sign({ userId: user.id }, process.env.USER_SECRET);
 
-    ctx.response.cookie('token', token, {
+    ctx.res.cookie('token', token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 31,
     });
-    console.log(token);
+    console.log(user);
     return user;
   },
 }
