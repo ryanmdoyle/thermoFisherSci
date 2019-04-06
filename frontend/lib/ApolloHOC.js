@@ -7,9 +7,9 @@ function createClient({ headers }) {
     uri: process.env.NODE_ENV === 'development' ? endpoint : endpoint,
     request: operation => { //like a middleware that passes credentials and headers to all requests
       operation.setContext({
-        fetchOptions: {
-          credentials: 'include',
-        },
+        // fetchOptions: {
+        //   credentials: 'include',
+        // },
         headers,
       });
     },

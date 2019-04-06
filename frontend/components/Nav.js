@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import User from './User';
+import SignoutButton from './SignoutButton';
 
 const NavStyled = styled.nav`
   display: flex;
@@ -25,6 +27,12 @@ class Nav extends Component {
         <Link href='/login'>
           <a>Login</a>
         </Link>
+        <User>
+          {data => {
+            console.log(data)
+            return <p>User here!</p>
+          }}
+        </User>
       </NavStyled>
     );
   }

@@ -3,6 +3,7 @@
 # These define the client side schema for data inputs.  These types are used to collect inputs and then resolved in the resolvers
 type Query {
   user(id: ID!): User
+  me: User
 }
 
 type Mutation {

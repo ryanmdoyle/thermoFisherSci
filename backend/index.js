@@ -24,27 +24,35 @@ const server = new ApolloServer({
     Mutation,
     Query
   },
-  context: req => ({ ...req, db })
+  context: ({ req }) => {
+    const { token } = req.cookies || "No User";
+    if (token) {
+      const { userId } = jwt.verify(token, process.env.USER_SECRET);
+      req.userId = userId; // add the user to future requests based on token data
+    }
+    return { ...req, db, token }
+  }
 });
 
 const app = express();
 
-var corsOptions = {
-  origin: process.env.FRONTEND_URL,
-  credentials: true // <-- REQUIRED backend setting
-};
+// var corsOptions = {
+//   origin: process.env.FRONTEND_URL,
+//   credentials: true // <-- REQUIRED backend setting
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(cookieParser());
-app.use((req, res, next) => {
-  const { token } = req.cookies;
-  if (token) {
-    const { userId } = jwt.verify(token, process.env.APP_SECRET);
-    // add the user to future requests
-    req.userId = userId;
-  }
-  next();
-});
+// app.use((req, res, next) => {
+//   const { token } = req.cookies;
+//   if (token) {
+//     const { userId } = jwt.verify(token, process.env.USER_SECRET); //verify must match the same secret!
+//     // add the user to future requests based on token data
+//     req.userId = userId;
+//   }
+//   console.log(token)
+//   next();
+// });
 
 server.applyMiddleware({
   app,
