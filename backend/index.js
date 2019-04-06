@@ -46,7 +46,8 @@ app.use(cookieParser());
 
 server.applyMiddleware({
   app,
-  path: '/'
+  path: '/',
+  cors: false, // disables the apollo-server-express cors to allow the cors middleware use
 })
 
 app.listen({ port: 4000 }, () =>
