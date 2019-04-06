@@ -36,23 +36,13 @@ const server = new ApolloServer({
 
 const app = express();
 
-// var corsOptions = {
-//   origin: process.env.FRONTEND_URL,
-//   credentials: true // <-- REQUIRED backend setting
-// };
+var corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  credentials: true // <-- REQUIRED backend setting
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser());
-// app.use((req, res, next) => {
-//   const { token } = req.cookies;
-//   if (token) {
-//     const { userId } = jwt.verify(token, process.env.USER_SECRET); //verify must match the same secret!
-//     // add the user to future requests based on token data
-//     req.userId = userId;
-//   }
-//   console.log(token)
-//   next();
-// });
 
 server.applyMiddleware({
   app,
