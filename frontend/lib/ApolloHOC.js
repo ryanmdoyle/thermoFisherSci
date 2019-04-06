@@ -1,7 +1,9 @@
-import withApollo from 'next-with-apollo'; //for next-js server-side rendering
-import ApolloClient from 'apollo-boost'; //boost is all the essential packages in one
-import { endpoint } from '../config'; //the apollo api endpoint
+import withApollo from 'next-with-apollo'; // package to create HOC
+import ApolloClient, { InMemoryCache } from 'apollo-boost'; // bundle of Apollo packages
+import { createHttpLink } from 'apollo-link-http';
+import { endpoint } from '../config';
 
+<<<<<<< HEAD
 function createClient({ headers }) {
   return new ApolloClient({
     uri: process.env.NODE_ENV === 'development' ? endpoint : endpoint,
@@ -15,5 +17,18 @@ function createClient({ headers }) {
     },
   });
 }
+=======
+const link = createHttpLink({
+  uri: '/',
+  credentials: 'include'
+});
+>>>>>>> parent of 31f8a90... Rewite of Apollo Client HOC
 
-export default withApollo(createClient);
+export default withApollo(({ ctx, headers, initialState }) => (
+
+  new ApolloClient({
+    uri: endpoint,
+    cache: new InMemoryCache().restore(initialState || {}),
+    link
+  })
+))
