@@ -23,7 +23,7 @@ const server = new ApolloServer({
     Mutation,
     Query
   },
-  context: req => ({ ...req, db })
+  context: req => ({ ...req, db }),
 });
 
 const app = express();

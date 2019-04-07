@@ -31,11 +31,6 @@ input EditsCreateInput {
   user: UserCreateOneInput!
 }
 
-input EditsCreateManyInput {
-  create: [EditsCreateInput!]
-  connect: [EditsWhereUniqueInput!]
-}
-
 type EditsEdge {
   node: Edits!
   cursor: String!
@@ -57,40 +52,6 @@ type EditsPreviousValues {
   field: String
 }
 
-input EditsScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  field: String
-  field_not: String
-  field_in: [String!]
-  field_not_in: [String!]
-  field_lt: String
-  field_lte: String
-  field_gt: String
-  field_gte: String
-  field_contains: String
-  field_not_contains: String
-  field_starts_with: String
-  field_not_starts_with: String
-  field_ends_with: String
-  field_not_ends_with: String
-  AND: [EditsScalarWhereInput!]
-  OR: [EditsScalarWhereInput!]
-  NOT: [EditsScalarWhereInput!]
-}
-
 type EditsSubscriptionPayload {
   mutation: MutationType!
   node: Edits
@@ -109,50 +70,13 @@ input EditsSubscriptionWhereInput {
   NOT: [EditsSubscriptionWhereInput!]
 }
 
-input EditsUpdateDataInput {
-  field: String
-  user: UserUpdateOneRequiredInput
-}
-
 input EditsUpdateInput {
   field: String
   user: UserUpdateOneRequiredInput
 }
 
-input EditsUpdateManyDataInput {
-  field: String
-}
-
-input EditsUpdateManyInput {
-  create: [EditsCreateInput!]
-  update: [EditsUpdateWithWhereUniqueNestedInput!]
-  upsert: [EditsUpsertWithWhereUniqueNestedInput!]
-  delete: [EditsWhereUniqueInput!]
-  connect: [EditsWhereUniqueInput!]
-  set: [EditsWhereUniqueInput!]
-  disconnect: [EditsWhereUniqueInput!]
-  deleteMany: [EditsScalarWhereInput!]
-  updateMany: [EditsUpdateManyWithWhereNestedInput!]
-}
-
 input EditsUpdateManyMutationInput {
   field: String
-}
-
-input EditsUpdateManyWithWhereNestedInput {
-  where: EditsScalarWhereInput!
-  data: EditsUpdateManyDataInput!
-}
-
-input EditsUpdateWithWhereUniqueNestedInput {
-  where: EditsWhereUniqueInput!
-  data: EditsUpdateDataInput!
-}
-
-input EditsUpsertWithWhereUniqueNestedInput {
-  where: EditsWhereUniqueInput!
-  update: EditsUpdateDataInput!
-  create: EditsCreateInput!
 }
 
 input EditsWhereInput {
@@ -261,7 +185,6 @@ type Part {
   portugeseShort_pt: String
   spanishLong_es: String
   spanishShort_es: String
-  edits(where: EditsWhereInput, orderBy: EditsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Edits!]
 }
 
 type PartConnection {
@@ -296,7 +219,6 @@ input PartCreateInput {
   portugeseShort_pt: String
   spanishLong_es: String
   spanishShort_es: String
-  edits: EditsCreateManyInput
 }
 
 type PartEdge {
@@ -436,7 +358,6 @@ input PartUpdateInput {
   portugeseShort_pt: String
   spanishLong_es: String
   spanishShort_es: String
-  edits: EditsUpdateManyInput
 }
 
 input PartUpdateManyMutationInput {
@@ -832,9 +753,6 @@ input PartWhereInput {
   spanishShort_es_not_starts_with: String
   spanishShort_es_ends_with: String
   spanishShort_es_not_ends_with: String
-  edits_every: EditsWhereInput
-  edits_some: EditsWhereInput
-  edits_none: EditsWhereInput
   AND: [PartWhereInput!]
   OR: [PartWhereInput!]
   NOT: [PartWhereInput!]

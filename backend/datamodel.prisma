@@ -57,7 +57,6 @@ type Part {
   portugeseShort_pt: String
   spanishLong_es: String
   spanishShort_es: String
-  edits: [Edits]
 }
 
 type Edits {
