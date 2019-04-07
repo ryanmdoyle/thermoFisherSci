@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginForm from '../components/LoginForm';
 
-const login = () => {
+const login = (props) => {
   return (
     <React.Fragment>
       <h1>Login</h1>

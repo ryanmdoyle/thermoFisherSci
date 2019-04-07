@@ -2,8 +2,9 @@
 
 # These define the client side schema for data inputs.  These types are used to collect inputs and then resolved in the resolvers
 type Query {
-  user(id: ID!): User
+  user( id: ID! ): User
   me: User
+  parts( where: String ): Part
 }
 
 type Mutation {
@@ -16,10 +17,12 @@ type Mutation {
     permissions: UserCreatepermissionsInput
   ): User!
 
-  signin(
+  login(
     email: String!
     password: String!
   ): User!
+
+  logout: SuccessMessage
 
   createPart(
     partNumber: String!
@@ -100,4 +103,8 @@ type Mutation {
     ukranianLong_uk: String
     ukranianShort_uk: String
   ): Part!
+}
+
+type SuccessMessage {
+  message: String
 }

@@ -1,7 +1,6 @@
 const express = require('express');
 const { Prisma } = require('prisma-binding');
 const { ApolloServer } = require('apollo-server-express');
-const graphqlHTTP = require('express-graphql');
 const { importSchema } = require('graphql-import');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
@@ -24,14 +23,7 @@ const server = new ApolloServer({
     Mutation,
     Query
   },
-  context: ({ req }) => {
-    const { token } = req.cookies || "No User";
-    if (token) {
-      const { userId } = jwt.verify(token, process.env.USER_SECRET);
-      req.userId = userId; // add the user to future requests based on token data
-    }
-    return { ...req, db, token }
-  }
+  context: req => ({ ...req, db })
 });
 
 const app = express();
@@ -43,6 +35,14 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(cookieParser());
+app.use((req, res, next) => { // checks for user in cookies and adds userId to the requests
+  const { token } = req.cookies;
+  if (token) {
+    const { userId } = jwt.verify(token, process.env.USER_SECRET);
+    req.userId = userId;
+  }
+  next();
+})
 
 server.applyMiddleware({
   app,

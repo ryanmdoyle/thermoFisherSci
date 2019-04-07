@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+import User from './User';
+import LoginForm from './LoginForm';
+import Parts from './Parts';
 
 class Home extends Component {
   render() {
     return (
-      <div>
-        <h1>Header 1</h1>
-        <h2>Header 2</h2>
-        <h3>Header 3</h3>
-        <p>Paragraph</p>
-
-      </div>
+      <User>
+        {({ data: { me } }) => (
+          <>
+            {me && (<Parts />)}
+            {!me && (<LoginForm />)}
+          </>
+        )}
+      </User>
     );
   }
 }
