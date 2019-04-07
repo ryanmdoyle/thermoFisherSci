@@ -61,6 +61,7 @@ type Part {
 }
 
 type Edits {
+  id: ID! @unique
   field: String
   user: User!
 }
