@@ -4,7 +4,7 @@
 type Query {
   user( id: ID! ): User
   me: User
-  parts(where: PartWhereInput, orderBy: PartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): Part
+  parts(where: PartWhereInput, orderBy: PartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Part]
 }
 
 type Mutation {

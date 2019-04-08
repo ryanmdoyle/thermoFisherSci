@@ -58,9 +58,3 @@ type Part {
   spanishLong_es: String
   spanishShort_es: String
 }
-
-type Edits {
-  id: ID! @unique
-  field: String
-  user: User!
-}

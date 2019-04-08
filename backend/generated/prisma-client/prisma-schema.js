@@ -3,11 +3,7 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateEdits {
-  count: Int!
-}
-
-type AggregatePart {
+/* GraphQL */ `type AggregatePart {
   count: Int!
 }
 
@@ -19,119 +15,9 @@ type BatchPayload {
   count: Long!
 }
 
-type Edits {
-  id: ID!
-  field: String
-  user: User!
-}
-
-type EditsConnection {
-  pageInfo: PageInfo!
-  edges: [EditsEdge]!
-  aggregate: AggregateEdits!
-}
-
-input EditsCreateInput {
-  field: String
-  user: UserCreateOneInput!
-}
-
-type EditsEdge {
-  node: Edits!
-  cursor: String!
-}
-
-enum EditsOrderByInput {
-  id_ASC
-  id_DESC
-  field_ASC
-  field_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type EditsPreviousValues {
-  id: ID!
-  field: String
-}
-
-type EditsSubscriptionPayload {
-  mutation: MutationType!
-  node: Edits
-  updatedFields: [String!]
-  previousValues: EditsPreviousValues
-}
-
-input EditsSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: EditsWhereInput
-  AND: [EditsSubscriptionWhereInput!]
-  OR: [EditsSubscriptionWhereInput!]
-  NOT: [EditsSubscriptionWhereInput!]
-}
-
-input EditsUpdateInput {
-  field: String
-  user: UserUpdateOneRequiredInput
-}
-
-input EditsUpdateManyMutationInput {
-  field: String
-}
-
-input EditsWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  field: String
-  field_not: String
-  field_in: [String!]
-  field_not_in: [String!]
-  field_lt: String
-  field_lte: String
-  field_gt: String
-  field_gte: String
-  field_contains: String
-  field_not_contains: String
-  field_starts_with: String
-  field_not_starts_with: String
-  field_ends_with: String
-  field_not_ends_with: String
-  user: UserWhereInput
-  AND: [EditsWhereInput!]
-  OR: [EditsWhereInput!]
-  NOT: [EditsWhereInput!]
-}
-
-input EditsWhereUniqueInput {
-  id: ID
-}
-
 scalar Long
 
 type Mutation {
-  createEdits(data: EditsCreateInput!): Edits!
-  updateEdits(data: EditsUpdateInput!, where: EditsWhereUniqueInput!): Edits
-  updateManyEditses(data: EditsUpdateManyMutationInput!, where: EditsWhereInput): BatchPayload!
-  upsertEdits(where: EditsWhereUniqueInput!, create: EditsCreateInput!, update: EditsUpdateInput!): Edits!
-  deleteEdits(where: EditsWhereUniqueInput!): Edits
-  deleteManyEditses(where: EditsWhereInput): BatchPayload!
   createPart(data: PartCreateInput!): Part!
   updatePart(data: PartUpdateInput!, where: PartWhereUniqueInput!): Part
   updateManyParts(data: PartUpdateManyMutationInput!, where: PartWhereInput): BatchPayload!
@@ -790,9 +676,6 @@ enum Permission {
 }
 
 type Query {
-  edits(where: EditsWhereUniqueInput!): Edits
-  editses(where: EditsWhereInput, orderBy: EditsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Edits]!
-  editsesConnection(where: EditsWhereInput, orderBy: EditsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EditsConnection!
   part(where: PartWhereUniqueInput!): Part
   parts(where: PartWhereInput, orderBy: PartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Part]!
   partsConnection(where: PartWhereInput, orderBy: PartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartConnection!
@@ -803,7 +686,6 @@ type Query {
 }
 
 type Subscription {
-  edits(where: EditsSubscriptionWhereInput): EditsSubscriptionPayload
   part(where: PartSubscriptionWhereInput): PartSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
@@ -831,11 +713,6 @@ input UserCreateInput {
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserCreatepermissionsInput
-}
-
-input UserCreateOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
 }
 
 input UserCreatepermissionsInput {
@@ -894,15 +771,6 @@ input UserSubscriptionWhereInput {
   NOT: [UserSubscriptionWhereInput!]
 }
 
-input UserUpdateDataInput {
-  name: String
-  email: String
-  password: String
-  resetToken: String
-  resetTokenExpiry: Float
-  permissions: UserUpdatepermissionsInput
-}
-
 input UserUpdateInput {
   name: String
   email: String
@@ -921,20 +789,8 @@ input UserUpdateManyMutationInput {
   permissions: UserUpdatepermissionsInput
 }
 
-input UserUpdateOneRequiredInput {
-  create: UserCreateInput
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
-  connect: UserWhereUniqueInput
-}
-
 input UserUpdatepermissionsInput {
   set: [Permission!]
-}
-
-input UserUpsertNestedInput {
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
 }
 
 input UserWhereInput {

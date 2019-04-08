@@ -14,7 +14,6 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
   U[keyof U];
 
 export interface Exists {
-  edits: (where?: EditsWhereInput) => Promise<boolean>;
   part: (where?: PartWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
@@ -38,29 +37,6 @@ export interface Prisma {
    * Queries
    */
 
-  edits: (where: EditsWhereUniqueInput) => EditsPromise;
-  editses: (
-    args?: {
-      where?: EditsWhereInput;
-      orderBy?: EditsOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<Edits>;
-  editsesConnection: (
-    args?: {
-      where?: EditsWhereInput;
-      orderBy?: EditsOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => EditsConnectionPromise;
   part: (where: PartWhereUniqueInput) => PartPromise;
   parts: (
     args?: {
@@ -113,22 +89,6 @@ export interface Prisma {
    * Mutations
    */
 
-  createEdits: (data: EditsCreateInput) => EditsPromise;
-  updateEdits: (
-    args: { data: EditsUpdateInput; where: EditsWhereUniqueInput }
-  ) => EditsPromise;
-  updateManyEditses: (
-    args: { data: EditsUpdateManyMutationInput; where?: EditsWhereInput }
-  ) => BatchPayloadPromise;
-  upsertEdits: (
-    args: {
-      where: EditsWhereUniqueInput;
-      create: EditsCreateInput;
-      update: EditsUpdateInput;
-    }
-  ) => EditsPromise;
-  deleteEdits: (where: EditsWhereUniqueInput) => EditsPromise;
-  deleteManyEditses: (where?: EditsWhereInput) => BatchPayloadPromise;
   createPart: (data: PartCreateInput) => PartPromise;
   updatePart: (
     args: { data: PartUpdateInput; where: PartWhereUniqueInput }
@@ -170,9 +130,6 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  edits: (
-    where?: EditsSubscriptionWhereInput
-  ) => EditsSubscriptionPayloadSubscription;
   part: (
     where?: PartSubscriptionWhereInput
   ) => PartSubscriptionPayloadSubscription;
@@ -188,16 +145,6 @@ export interface ClientConstructor<T> {
 /**
  * Types
  */
-
-export type EditsOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "field_ASC"
-  | "field_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
 
 export type Permission =
   | "ADMIN"
@@ -278,8 +225,6 @@ export type PartOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type MutationType = "CREATED" | "UPDATED" | "DELETED";
-
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -298,142 +243,15 @@ export type UserOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export interface EditsUpdateManyMutationInput {
-  field?: String;
-}
+export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface EditsCreateInput {
-  field?: String;
-  user: UserCreateOneInput;
-}
-
-export interface EditsSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: EditsWhereInput;
-  AND?: EditsSubscriptionWhereInput[] | EditsSubscriptionWhereInput;
-  OR?: EditsSubscriptionWhereInput[] | EditsSubscriptionWhereInput;
-  NOT?: EditsSubscriptionWhereInput[] | EditsSubscriptionWhereInput;
-}
-
-export type EditsWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface UserUpdatepermissionsInput {
+export interface UserCreatepermissionsInput {
   set?: Permission[] | Permission;
 }
 
-export interface UserWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  email?: String;
-  email_not?: String;
-  email_in?: String[] | String;
-  email_not_in?: String[] | String;
-  email_lt?: String;
-  email_lte?: String;
-  email_gt?: String;
-  email_gte?: String;
-  email_contains?: String;
-  email_not_contains?: String;
-  email_starts_with?: String;
-  email_not_starts_with?: String;
-  email_ends_with?: String;
-  email_not_ends_with?: String;
-  password?: String;
-  password_not?: String;
-  password_in?: String[] | String;
-  password_not_in?: String[] | String;
-  password_lt?: String;
-  password_lte?: String;
-  password_gt?: String;
-  password_gte?: String;
-  password_contains?: String;
-  password_not_contains?: String;
-  password_starts_with?: String;
-  password_not_starts_with?: String;
-  password_ends_with?: String;
-  password_not_ends_with?: String;
-  resetToken?: String;
-  resetToken_not?: String;
-  resetToken_in?: String[] | String;
-  resetToken_not_in?: String[] | String;
-  resetToken_lt?: String;
-  resetToken_lte?: String;
-  resetToken_gt?: String;
-  resetToken_gte?: String;
-  resetToken_contains?: String;
-  resetToken_not_contains?: String;
-  resetToken_starts_with?: String;
-  resetToken_not_starts_with?: String;
-  resetToken_ends_with?: String;
-  resetToken_not_ends_with?: String;
-  resetTokenExpiry?: Float;
-  resetTokenExpiry_not?: Float;
-  resetTokenExpiry_in?: Float[] | Float;
-  resetTokenExpiry_not_in?: Float[] | Float;
-  resetTokenExpiry_lt?: Float;
-  resetTokenExpiry_lte?: Float;
-  resetTokenExpiry_gt?: Float;
-  resetTokenExpiry_gte?: Float;
-  AND?: UserWhereInput[] | UserWhereInput;
-  OR?: UserWhereInput[] | UserWhereInput;
-  NOT?: UserWhereInput[] | UserWhereInput;
-}
-
-export interface UserUpdateDataInput {
-  name?: String;
-  email?: String;
-  password?: String;
-  resetToken?: String;
-  resetTokenExpiry?: Float;
-  permissions?: UserUpdatepermissionsInput;
-}
-
-export interface UserUpdateManyMutationInput {
-  name?: String;
-  email?: String;
-  password?: String;
-  resetToken?: String;
-  resetTokenExpiry?: Float;
-  permissions?: UserUpdatepermissionsInput;
-}
-
-export interface UserUpdateOneRequiredInput {
-  create?: UserCreateInput;
-  update?: UserUpdateDataInput;
-  upsert?: UserUpsertNestedInput;
-  connect?: UserWhereUniqueInput;
-}
+export type PartWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
 
 export interface PartUpdateManyMutationInput {
   partNumber?: String;
@@ -463,10 +281,51 @@ export interface PartUpdateManyMutationInput {
   spanishShort_es?: String;
 }
 
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
+export interface UserUpdateManyMutationInput {
+  name?: String;
   email?: String;
-}>;
+  password?: String;
+  resetToken?: String;
+  resetTokenExpiry?: Float;
+  permissions?: UserUpdatepermissionsInput;
+}
+
+export interface PartUpdateInput {
+  partNumber?: String;
+  chineseLong_zh_cn?: String;
+  chineseShort_zh_cn?: String;
+  chineseTLong_zh_tw?: String;
+  chineseTShort_zh_tw?: String;
+  danishLong_da?: String;
+  danishShort_da?: String;
+  dutchLong_nl?: String;
+  dutchShort_nl?: String;
+  englishLong_en?: String;
+  englishShort_en?: String;
+  frenchLong_fr?: String;
+  frenchShort_fr?: String;
+  germanLong_de?: String;
+  germanShort_de?: String;
+  italianLong_it?: String;
+  italianShort_it?: String;
+  japaneseLong_ja?: String;
+  japaneseShort_ja?: String;
+  koreanLong_ko?: String;
+  koreanShort_ko?: String;
+  portugeseLong_pt?: String;
+  portugeseShort_pt?: String;
+  spanishLong_es?: String;
+  spanishShort_es?: String;
+}
+
+export interface UserUpdateInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  resetToken?: String;
+  resetTokenExpiry?: Float;
+  permissions?: UserUpdatepermissionsInput;
+}
 
 export interface PartCreateInput {
   partNumber: String;
@@ -495,21 +354,6 @@ export interface PartCreateInput {
   spanishLong_es?: String;
   spanishShort_es?: String;
 }
-
-export interface PartSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: PartWhereInput;
-  AND?: PartSubscriptionWhereInput[] | PartSubscriptionWhereInput;
-  OR?: PartSubscriptionWhereInput[] | PartSubscriptionWhereInput;
-  NOT?: PartSubscriptionWhereInput[] | PartSubscriptionWhereInput;
-}
-
-export type PartWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
 
 export interface PartWhereInput {
   id?: ID_Input;
@@ -881,30 +725,7 @@ export interface PartWhereInput {
   NOT?: PartWhereInput[] | PartWhereInput;
 }
 
-export interface UserCreateOneInput {
-  create?: UserCreateInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface UserCreateInput {
-  name: String;
-  email: String;
-  password: String;
-  resetToken?: String;
-  resetTokenExpiry?: Float;
-  permissions?: UserCreatepermissionsInput;
-}
-
-export interface UserCreatepermissionsInput {
-  set?: Permission[] | Permission;
-}
-
-export interface EditsUpdateInput {
-  field?: String;
-  user?: UserUpdateOneRequiredInput;
-}
-
-export interface EditsWhereInput {
+export interface UserWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -919,29 +740,84 @@ export interface EditsWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  field?: String;
-  field_not?: String;
-  field_in?: String[] | String;
-  field_not_in?: String[] | String;
-  field_lt?: String;
-  field_lte?: String;
-  field_gt?: String;
-  field_gte?: String;
-  field_contains?: String;
-  field_not_contains?: String;
-  field_starts_with?: String;
-  field_not_starts_with?: String;
-  field_ends_with?: String;
-  field_not_ends_with?: String;
-  user?: UserWhereInput;
-  AND?: EditsWhereInput[] | EditsWhereInput;
-  OR?: EditsWhereInput[] | EditsWhereInput;
-  NOT?: EditsWhereInput[] | EditsWhereInput;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  email?: String;
+  email_not?: String;
+  email_in?: String[] | String;
+  email_not_in?: String[] | String;
+  email_lt?: String;
+  email_lte?: String;
+  email_gt?: String;
+  email_gte?: String;
+  email_contains?: String;
+  email_not_contains?: String;
+  email_starts_with?: String;
+  email_not_starts_with?: String;
+  email_ends_with?: String;
+  email_not_ends_with?: String;
+  password?: String;
+  password_not?: String;
+  password_in?: String[] | String;
+  password_not_in?: String[] | String;
+  password_lt?: String;
+  password_lte?: String;
+  password_gt?: String;
+  password_gte?: String;
+  password_contains?: String;
+  password_not_contains?: String;
+  password_starts_with?: String;
+  password_not_starts_with?: String;
+  password_ends_with?: String;
+  password_not_ends_with?: String;
+  resetToken?: String;
+  resetToken_not?: String;
+  resetToken_in?: String[] | String;
+  resetToken_not_in?: String[] | String;
+  resetToken_lt?: String;
+  resetToken_lte?: String;
+  resetToken_gt?: String;
+  resetToken_gte?: String;
+  resetToken_contains?: String;
+  resetToken_not_contains?: String;
+  resetToken_starts_with?: String;
+  resetToken_not_starts_with?: String;
+  resetToken_ends_with?: String;
+  resetToken_not_ends_with?: String;
+  resetTokenExpiry?: Float;
+  resetTokenExpiry_not?: Float;
+  resetTokenExpiry_in?: Float[] | Float;
+  resetTokenExpiry_not_in?: Float[] | Float;
+  resetTokenExpiry_lt?: Float;
+  resetTokenExpiry_lte?: Float;
+  resetTokenExpiry_gt?: Float;
+  resetTokenExpiry_gte?: Float;
+  AND?: UserWhereInput[] | UserWhereInput;
+  OR?: UserWhereInput[] | UserWhereInput;
+  NOT?: UserWhereInput[] | UserWhereInput;
 }
 
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
+export interface PartSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: PartWhereInput;
+  AND?: PartSubscriptionWhereInput[] | PartSubscriptionWhereInput;
+  OR?: PartSubscriptionWhereInput[] | PartSubscriptionWhereInput;
+  NOT?: PartSubscriptionWhereInput[] | PartSubscriptionWhereInput;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -955,68 +831,43 @@ export interface UserSubscriptionWhereInput {
   NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
 }
 
-export interface PartUpdateInput {
-  partNumber?: String;
-  chineseLong_zh_cn?: String;
-  chineseShort_zh_cn?: String;
-  chineseTLong_zh_tw?: String;
-  chineseTShort_zh_tw?: String;
-  danishLong_da?: String;
-  danishShort_da?: String;
-  dutchLong_nl?: String;
-  dutchShort_nl?: String;
-  englishLong_en?: String;
-  englishShort_en?: String;
-  frenchLong_fr?: String;
-  frenchShort_fr?: String;
-  germanLong_de?: String;
-  germanShort_de?: String;
-  italianLong_it?: String;
-  italianShort_it?: String;
-  japaneseLong_ja?: String;
-  japaneseShort_ja?: String;
-  koreanLong_ko?: String;
-  koreanShort_ko?: String;
-  portugeseLong_pt?: String;
-  portugeseShort_pt?: String;
-  spanishLong_es?: String;
-  spanishShort_es?: String;
+export interface UserUpdatepermissionsInput {
+  set?: Permission[] | Permission;
 }
 
-export interface UserUpdateInput {
-  name?: String;
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
   email?: String;
-  password?: String;
+}>;
+
+export interface UserCreateInput {
+  name: String;
+  email: String;
+  password: String;
   resetToken?: String;
   resetTokenExpiry?: Float;
-  permissions?: UserUpdatepermissionsInput;
+  permissions?: UserCreatepermissionsInput;
 }
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
+export interface UserEdge {
+  node: User;
+  cursor: String;
 }
 
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
     Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserPreviousValues {
@@ -1053,44 +904,6 @@ export interface UserPreviousValuesSubscription
   permissions: () => Promise<AsyncIterator<Permission[]>>;
 }
 
-export interface EditsConnection {
-  pageInfo: PageInfo;
-  edges: EditsEdge[];
-}
-
-export interface EditsConnectionPromise
-  extends Promise<EditsConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<EditsEdge>>() => T;
-  aggregate: <T = AggregateEditsPromise>() => T;
-}
-
-export interface EditsConnectionSubscription
-  extends Promise<AsyncIterator<EditsConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<EditsEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateEditsSubscription>() => T;
-}
-
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
-    Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
 export interface AggregateUser {
   count: Int;
 }
@@ -1107,29 +920,27 @@ export interface AggregateUserSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface PartSubscriptionPayload {
-  mutation: MutationType;
-  node: Part;
-  updatedFields: String[];
-  previousValues: PartPreviousValues;
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
 }
 
-export interface PartSubscriptionPayloadPromise
-  extends Promise<PartSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = PartPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = PartPreviousValuesPromise>() => T;
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
 }
 
-export interface PartSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<PartSubscriptionPayload>>,
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = PartSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = PartPreviousValuesSubscription>() => T;
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserConnection {
@@ -1153,186 +964,25 @@ export interface UserConnectionSubscription
   aggregate: <T = AggregateUserSubscription>() => T;
 }
 
-export interface AggregatePart {
-  count: Int;
+export interface PartConnection {
+  pageInfo: PageInfo;
+  edges: PartEdge[];
 }
 
-export interface AggregatePartPromise
-  extends Promise<AggregatePart>,
+export interface PartConnectionPromise
+  extends Promise<PartConnection>,
     Fragmentable {
-  count: () => Promise<Int>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PartEdge>>() => T;
+  aggregate: <T = AggregatePartPromise>() => T;
 }
 
-export interface AggregatePartSubscription
-  extends Promise<AsyncIterator<AggregatePart>>,
+export interface PartConnectionSubscription
+  extends Promise<AsyncIterator<PartConnection>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PartEdge {
-  node: Part;
-  cursor: String;
-}
-
-export interface PartEdgePromise extends Promise<PartEdge>, Fragmentable {
-  node: <T = PartPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface PartEdgeSubscription
-  extends Promise<AsyncIterator<PartEdge>>,
-    Fragmentable {
-  node: <T = PartSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface Part {
-  id: ID_Output;
-  partNumber: String;
-  chineseLong_zh_cn?: String;
-  chineseShort_zh_cn?: String;
-  chineseTLong_zh_tw?: String;
-  chineseTShort_zh_tw?: String;
-  danishLong_da?: String;
-  danishShort_da?: String;
-  dutchLong_nl?: String;
-  dutchShort_nl?: String;
-  englishLong_en?: String;
-  englishShort_en?: String;
-  frenchLong_fr?: String;
-  frenchShort_fr?: String;
-  germanLong_de?: String;
-  germanShort_de?: String;
-  italianLong_it?: String;
-  italianShort_it?: String;
-  japaneseLong_ja?: String;
-  japaneseShort_ja?: String;
-  koreanLong_ko?: String;
-  koreanShort_ko?: String;
-  portugeseLong_pt?: String;
-  portugeseShort_pt?: String;
-  spanishLong_es?: String;
-  spanishShort_es?: String;
-}
-
-export interface PartPromise extends Promise<Part>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  partNumber: () => Promise<String>;
-  chineseLong_zh_cn: () => Promise<String>;
-  chineseShort_zh_cn: () => Promise<String>;
-  chineseTLong_zh_tw: () => Promise<String>;
-  chineseTShort_zh_tw: () => Promise<String>;
-  danishLong_da: () => Promise<String>;
-  danishShort_da: () => Promise<String>;
-  dutchLong_nl: () => Promise<String>;
-  dutchShort_nl: () => Promise<String>;
-  englishLong_en: () => Promise<String>;
-  englishShort_en: () => Promise<String>;
-  frenchLong_fr: () => Promise<String>;
-  frenchShort_fr: () => Promise<String>;
-  germanLong_de: () => Promise<String>;
-  germanShort_de: () => Promise<String>;
-  italianLong_it: () => Promise<String>;
-  italianShort_it: () => Promise<String>;
-  japaneseLong_ja: () => Promise<String>;
-  japaneseShort_ja: () => Promise<String>;
-  koreanLong_ko: () => Promise<String>;
-  koreanShort_ko: () => Promise<String>;
-  portugeseLong_pt: () => Promise<String>;
-  portugeseShort_pt: () => Promise<String>;
-  spanishLong_es: () => Promise<String>;
-  spanishShort_es: () => Promise<String>;
-}
-
-export interface PartSubscription
-  extends Promise<AsyncIterator<Part>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  partNumber: () => Promise<AsyncIterator<String>>;
-  chineseLong_zh_cn: () => Promise<AsyncIterator<String>>;
-  chineseShort_zh_cn: () => Promise<AsyncIterator<String>>;
-  chineseTLong_zh_tw: () => Promise<AsyncIterator<String>>;
-  chineseTShort_zh_tw: () => Promise<AsyncIterator<String>>;
-  danishLong_da: () => Promise<AsyncIterator<String>>;
-  danishShort_da: () => Promise<AsyncIterator<String>>;
-  dutchLong_nl: () => Promise<AsyncIterator<String>>;
-  dutchShort_nl: () => Promise<AsyncIterator<String>>;
-  englishLong_en: () => Promise<AsyncIterator<String>>;
-  englishShort_en: () => Promise<AsyncIterator<String>>;
-  frenchLong_fr: () => Promise<AsyncIterator<String>>;
-  frenchShort_fr: () => Promise<AsyncIterator<String>>;
-  germanLong_de: () => Promise<AsyncIterator<String>>;
-  germanShort_de: () => Promise<AsyncIterator<String>>;
-  italianLong_it: () => Promise<AsyncIterator<String>>;
-  italianShort_it: () => Promise<AsyncIterator<String>>;
-  japaneseLong_ja: () => Promise<AsyncIterator<String>>;
-  japaneseShort_ja: () => Promise<AsyncIterator<String>>;
-  koreanLong_ko: () => Promise<AsyncIterator<String>>;
-  koreanShort_ko: () => Promise<AsyncIterator<String>>;
-  portugeseLong_pt: () => Promise<AsyncIterator<String>>;
-  portugeseShort_pt: () => Promise<AsyncIterator<String>>;
-  spanishLong_es: () => Promise<AsyncIterator<String>>;
-  spanishShort_es: () => Promise<AsyncIterator<String>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface EditsPreviousValues {
-  id: ID_Output;
-  field?: String;
-}
-
-export interface EditsPreviousValuesPromise
-  extends Promise<EditsPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  field: () => Promise<String>;
-}
-
-export interface EditsPreviousValuesSubscription
-  extends Promise<AsyncIterator<EditsPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  field: () => Promise<AsyncIterator<String>>;
-}
-
-export interface EditsSubscriptionPayload {
-  mutation: MutationType;
-  node: Edits;
-  updatedFields: String[];
-  previousValues: EditsPreviousValues;
-}
-
-export interface EditsSubscriptionPayloadPromise
-  extends Promise<EditsSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = EditsPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = EditsPreviousValuesPromise>() => T;
-}
-
-export interface EditsSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<EditsSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = EditsSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = EditsPreviousValuesSubscription>() => T;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PartEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePartSubscription>() => T;
 }
 
 export interface User {
@@ -1365,6 +1015,31 @@ export interface UserSubscription
   resetToken: () => Promise<AsyncIterator<String>>;
   resetTokenExpiry: () => Promise<AsyncIterator<Float>>;
   permissions: () => Promise<AsyncIterator<Permission[]>>;
+}
+
+export interface PartSubscriptionPayload {
+  mutation: MutationType;
+  node: Part;
+  updatedFields: String[];
+  previousValues: PartPreviousValues;
+}
+
+export interface PartSubscriptionPayloadPromise
+  extends Promise<PartSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PartPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PartPreviousValuesPromise>() => T;
+}
+
+export interface PartSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PartSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PartSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PartPreviousValuesSubscription>() => T;
 }
 
 export interface PartPreviousValues {
@@ -1458,6 +1133,127 @@ export interface PartPreviousValuesSubscription
   spanishShort_es: () => Promise<AsyncIterator<String>>;
 }
 
+export interface AggregatePart {
+  count: Int;
+}
+
+export interface AggregatePartPromise
+  extends Promise<AggregatePart>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePartSubscription
+  extends Promise<AsyncIterator<AggregatePart>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface Part {
+  id: ID_Output;
+  partNumber: String;
+  chineseLong_zh_cn?: String;
+  chineseShort_zh_cn?: String;
+  chineseTLong_zh_tw?: String;
+  chineseTShort_zh_tw?: String;
+  danishLong_da?: String;
+  danishShort_da?: String;
+  dutchLong_nl?: String;
+  dutchShort_nl?: String;
+  englishLong_en?: String;
+  englishShort_en?: String;
+  frenchLong_fr?: String;
+  frenchShort_fr?: String;
+  germanLong_de?: String;
+  germanShort_de?: String;
+  italianLong_it?: String;
+  italianShort_it?: String;
+  japaneseLong_ja?: String;
+  japaneseShort_ja?: String;
+  koreanLong_ko?: String;
+  koreanShort_ko?: String;
+  portugeseLong_pt?: String;
+  portugeseShort_pt?: String;
+  spanishLong_es?: String;
+  spanishShort_es?: String;
+}
+
+export interface PartPromise extends Promise<Part>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  partNumber: () => Promise<String>;
+  chineseLong_zh_cn: () => Promise<String>;
+  chineseShort_zh_cn: () => Promise<String>;
+  chineseTLong_zh_tw: () => Promise<String>;
+  chineseTShort_zh_tw: () => Promise<String>;
+  danishLong_da: () => Promise<String>;
+  danishShort_da: () => Promise<String>;
+  dutchLong_nl: () => Promise<String>;
+  dutchShort_nl: () => Promise<String>;
+  englishLong_en: () => Promise<String>;
+  englishShort_en: () => Promise<String>;
+  frenchLong_fr: () => Promise<String>;
+  frenchShort_fr: () => Promise<String>;
+  germanLong_de: () => Promise<String>;
+  germanShort_de: () => Promise<String>;
+  italianLong_it: () => Promise<String>;
+  italianShort_it: () => Promise<String>;
+  japaneseLong_ja: () => Promise<String>;
+  japaneseShort_ja: () => Promise<String>;
+  koreanLong_ko: () => Promise<String>;
+  koreanShort_ko: () => Promise<String>;
+  portugeseLong_pt: () => Promise<String>;
+  portugeseShort_pt: () => Promise<String>;
+  spanishLong_es: () => Promise<String>;
+  spanishShort_es: () => Promise<String>;
+}
+
+export interface PartSubscription
+  extends Promise<AsyncIterator<Part>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  partNumber: () => Promise<AsyncIterator<String>>;
+  chineseLong_zh_cn: () => Promise<AsyncIterator<String>>;
+  chineseShort_zh_cn: () => Promise<AsyncIterator<String>>;
+  chineseTLong_zh_tw: () => Promise<AsyncIterator<String>>;
+  chineseTShort_zh_tw: () => Promise<AsyncIterator<String>>;
+  danishLong_da: () => Promise<AsyncIterator<String>>;
+  danishShort_da: () => Promise<AsyncIterator<String>>;
+  dutchLong_nl: () => Promise<AsyncIterator<String>>;
+  dutchShort_nl: () => Promise<AsyncIterator<String>>;
+  englishLong_en: () => Promise<AsyncIterator<String>>;
+  englishShort_en: () => Promise<AsyncIterator<String>>;
+  frenchLong_fr: () => Promise<AsyncIterator<String>>;
+  frenchShort_fr: () => Promise<AsyncIterator<String>>;
+  germanLong_de: () => Promise<AsyncIterator<String>>;
+  germanShort_de: () => Promise<AsyncIterator<String>>;
+  italianLong_it: () => Promise<AsyncIterator<String>>;
+  italianShort_it: () => Promise<AsyncIterator<String>>;
+  japaneseLong_ja: () => Promise<AsyncIterator<String>>;
+  japaneseShort_ja: () => Promise<AsyncIterator<String>>;
+  koreanLong_ko: () => Promise<AsyncIterator<String>>;
+  koreanShort_ko: () => Promise<AsyncIterator<String>>;
+  portugeseLong_pt: () => Promise<AsyncIterator<String>>;
+  portugeseShort_pt: () => Promise<AsyncIterator<String>>;
+  spanishLong_es: () => Promise<AsyncIterator<String>>;
+  spanishShort_es: () => Promise<AsyncIterator<String>>;
+}
+
 export interface UserSubscriptionPayload {
   mutation: MutationType;
   node: User;
@@ -1483,76 +1279,20 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface AggregateEdits {
-  count: Int;
-}
-
-export interface AggregateEditsPromise
-  extends Promise<AggregateEdits>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateEditsSubscription
-  extends Promise<AsyncIterator<AggregateEdits>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PartConnection {
-  pageInfo: PageInfo;
-  edges: PartEdge[];
-}
-
-export interface PartConnectionPromise
-  extends Promise<PartConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PartEdge>>() => T;
-  aggregate: <T = AggregatePartPromise>() => T;
-}
-
-export interface PartConnectionSubscription
-  extends Promise<AsyncIterator<PartConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PartEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePartSubscription>() => T;
-}
-
-export interface Edits {
-  id: ID_Output;
-  field?: String;
-}
-
-export interface EditsPromise extends Promise<Edits>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  field: () => Promise<String>;
-  user: <T = UserPromise>() => T;
-}
-
-export interface EditsSubscription
-  extends Promise<AsyncIterator<Edits>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  field: () => Promise<AsyncIterator<String>>;
-  user: <T = UserSubscription>() => T;
-}
-
-export interface EditsEdge {
-  node: Edits;
+export interface PartEdge {
+  node: Part;
   cursor: String;
 }
 
-export interface EditsEdgePromise extends Promise<EditsEdge>, Fragmentable {
-  node: <T = EditsPromise>() => T;
+export interface PartEdgePromise extends Promise<PartEdge>, Fragmentable {
+  node: <T = PartPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface EditsEdgeSubscription
-  extends Promise<AsyncIterator<EditsEdge>>,
+export interface PartEdgeSubscription
+  extends Promise<AsyncIterator<PartEdge>>,
     Fragmentable {
-  node: <T = EditsSubscription>() => T;
+  node: <T = PartSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
@@ -1562,17 +1302,17 @@ The `Int` scalar type represents non-fractional signed whole numeric values. Int
 export type Int = number;
 
 /*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+The `Boolean` scalar type represents `true` or `false`.
 */
-export type ID_Input = string | number;
-export type ID_Output = string;
+export type Boolean = boolean;
 
 export type Long = string;
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
-export type Boolean = boolean;
+export type ID_Input = string | number;
+export type ID_Output = string;
 
 /*
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
@@ -1599,10 +1339,6 @@ export const models: Model[] = [
   },
   {
     name: "Part",
-    embedded: false
-  },
-  {
-    name: "Edits",
     embedded: false
   }
 ];
