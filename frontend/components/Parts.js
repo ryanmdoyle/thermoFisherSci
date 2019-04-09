@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
-const PART_QUERY = gql`
+const PARTS_QUERY = gql`
 
   query($partNumber: String) {
     parts(
@@ -18,10 +18,16 @@ class Parts extends Component {
   render() {
     return (
       <Query query={PARTS_QUERY} variables={{ "$partNumber": "0001" }}>
-        {({ data: { parts } }) => (
+        {({ data: data }) => (
           <div>
-            <p>check console</p>
-            {console.log(parts)}
+            <h1>Parts</h1>
+            {console.log(data)}
+            {data.parts.map((part, index) => (
+              <div key={part.partNumber}>
+                <h3>{part.partNumber}</h3>
+                <p>{part.englishLong_en}</p>
+              </div>
+            ))}
           </div>
         )}
       </Query>
