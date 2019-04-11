@@ -1,9 +1,9 @@
 import React from 'react';
-import Parts from '../components/Parts';
+import Users from '../components/Users';
 
 const parts = (props) => {
   return (
-    <Parts />
+    <Users />
   );
 };
 

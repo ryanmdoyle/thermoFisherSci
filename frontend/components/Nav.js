@@ -32,11 +32,14 @@ class Nav extends Component {
           <NavStyled>
             {me && (
               <>
-                <Link href='/'>
-                  <a>View Parts</a>
+                <Link href='/parts'>
+                  <a>Parts</a>
                 </Link>
                 <Link href='/createPart'>
                   <a>Add Part</a>
+                </Link>
+                <Link href='/users'>
+                  <a>Users</a>
                 </Link>
                 <Logout />
               </>

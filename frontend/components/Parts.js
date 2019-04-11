@@ -21,7 +21,6 @@ class Parts extends Component {
         {({ data: data }) => (
           <div>
             <h1>Parts</h1>
-            {console.log(data)}
             {data.parts.map((part, index) => (
               <div key={part.partNumber}>
                 <h3>{part.partNumber}</h3>
