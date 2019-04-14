@@ -43,6 +43,14 @@ app.use((req, res, next) => { // checks for user in cookies and adds userId to t
   }
   next();
 })
+app.use(async (req, res, next) => {
+  if (!req.userId) return next();
+  const user = await db.query.user(
+    { where: { id: req.userId } },
+    '{id, permissions, email, name}' //the graphql query to pass to the user query
+  );
+  next();
+})
 
 server.applyMiddleware({
   app,
