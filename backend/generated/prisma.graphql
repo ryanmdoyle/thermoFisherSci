@@ -10,6 +10,8 @@ type BatchPayload {
   count: Long!
 }
 
+scalar DateTime
+
 scalar Long
 
 type Mutation {
@@ -46,6 +48,8 @@ type PageInfo {
 
 type Part {
   id: ID!
+  updatedAt: DateTime!
+  createdAt: DateTime!
   partNumber: String!
   chineseLong_zh_cn: String
   chineseShort_zh_cn: String
@@ -115,6 +119,10 @@ type PartEdge {
 enum PartOrderByInput {
   id_ASC
   id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
   partNumber_ASC
   partNumber_DESC
   chineseLong_zh_cn_ASC
@@ -165,14 +173,12 @@ enum PartOrderByInput {
   spanishLong_es_DESC
   spanishShort_es_ASC
   spanishShort_es_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type PartPreviousValues {
   id: ID!
+  updatedAt: DateTime!
+  createdAt: DateTime!
   partNumber: String!
   chineseLong_zh_cn: String
   chineseShort_zh_cn: String
@@ -289,6 +295,22 @@ input PartWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
   partNumber: String
   partNumber_not: String
   partNumber_in: [String!]
@@ -656,18 +678,30 @@ enum Permission {
   DELETE
   EXPORT
   PERMISSIONUPDATE
-  CHINESE_CN
-  CHINESE_TW
-  DANISH
-  DUTCH
-  ENGLISH
-  FRENCH
-  GERMAN
-  ITALIAN
-  JAPANESE
-  KOREAN
-  PORTUGESE
-  SPANISH
+  CHINESELONG_ZH_CN
+  CHINESESHORT_ZH_CN
+  CHINESETLONG_ZH_TW
+  CHINESETSHORT_ZH_TW
+  DANISHLONG_DA
+  DANISHSHORT_DA
+  DUTCHLONG_NL
+  DUTCHSHORT_NL
+  ENGLISHLONG_EN
+  ENGLISHSHORT_EN
+  FRENCHLONG_FR
+  FRENCHSHORT_FR
+  GERMANLONG_DE
+  GERMANSHORT_DE
+  ITALIANLONG_IT
+  ITALIANSHORT_IT
+  JAPANESELONG_JA
+  JAPANESESHORT_JA
+  KOREANLONG_KO
+  KOREANSHORT_KO
+  PORTUGESELONG_PT
+  PORTUGESESHORT_PT
+  SPANISHLONG_ES
+  SPANISHSHORT_ES
 }
 
 type Query {
@@ -687,6 +721,8 @@ type Subscription {
 
 type User {
   id: ID!
+  updatedAt: DateTime!
+  createdAt: DateTime!
   name: String!
   email: String!
   password: String!
@@ -722,6 +758,10 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
   name_ASC
   name_DESC
   email_ASC
@@ -732,14 +772,12 @@ enum UserOrderByInput {
   resetToken_DESC
   resetTokenExpiry_ASC
   resetTokenExpiry_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type UserPreviousValues {
   id: ID!
+  updatedAt: DateTime!
+  createdAt: DateTime!
   name: String!
   email: String!
   password: String!
@@ -803,6 +841,22 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
   name: String
   name_not: String
   name_in: [String!]

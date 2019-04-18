@@ -6,32 +6,48 @@ enum Permission {
   DELETE
   EXPORT
   PERMISSIONUPDATE
-  CHINESE_CN
-  CHINESE_TW
-  DANISH
-  DUTCH
-  ENGLISH
-  FRENCH
-  GERMAN
-  ITALIAN
-  JAPANESE
-  KOREAN
-  PORTUGESE
-  SPANISH
+  CHINESELONG_ZH_CN
+  CHINESESHORT_ZH_CN
+  CHINESETLONG_ZH_TW
+  CHINESETSHORT_ZH_TW
+  DANISHLONG_DA
+  DANISHSHORT_DA
+  DUTCHLONG_NL
+  DUTCHSHORT_NL
+  ENGLISHLONG_EN
+  ENGLISHSHORT_EN
+  FRENCHLONG_FR
+  FRENCHSHORT_FR
+  GERMANLONG_DE
+  GERMANSHORT_DE
+  ITALIANLONG_IT
+  ITALIANSHORT_IT
+  JAPANESELONG_JA
+  JAPANESESHORT_JA
+  KOREANLONG_KO
+  KOREANSHORT_KO
+  PORTUGESELONG_PT
+  PORTUGESESHORT_PT
+  SPANISHLONG_ES
+  SPANISHSHORT_ES
 }
 
 type User {
-  id: ID! @unique
+  id: ID! @id
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
   name: String!
   email: String! @unique
   password: String!
   resetToken: String
   resetTokenExpiry: Float
-  permissions: [Permission]
+  permissions: [Permission]! @scalarList(strategy: RELATION) @relation(link: INLINE) @default(value: USER)
 }
 
 type Part {
-  id: ID! @unique
+  id: ID! @id
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
   partNumber: String!
   chineseLong_zh_cn: String
   chineseShort_zh_cn: String
