@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import FormStyle from './styles/FormStyle';
 import createDescription from '../lib/createDescription';
+import MarkdownField from './MarkdownField';
 
 const CREATE_PART_MUTATION = gql`
   mutation CREATE_PART_MUTATION(
@@ -132,13 +133,18 @@ class CreatePart extends Component {
                       <label htmlFor={fieldName}>
                         {fieldDescription}
                       </label>
-                      <textarea
+                      <input
                         type='text'
                         name={fieldName}
                         placeholder={fieldName}
                         value={this.state.fieldName}
                         onChange={this.saveToState}
                       />
+                      {/* <MarkdownField
+                        label={fieldDescription}
+                        name={fieldName}
+                        onChange={this.saveToState}
+                      /> */}
                     </div>
                   )
                 }

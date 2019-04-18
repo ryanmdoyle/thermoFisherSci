@@ -10,7 +10,7 @@ const Query = {
     }, info);
   },
 
-  parts(parent, args, context, info) {
+  async parts(parent, args, context, info) {
     return context.db.query.parts()
   },
 
