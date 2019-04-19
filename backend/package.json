@@ -20,9 +20,11 @@
     "graphql-import": "^0.7.1",
     "graphql-yoga": "^1.17.4",
     "jsonwebtoken": "^8.5.1",
+    "marked": "^0.6.2",
     "nodemon": "^1.18.10",
     "prisma": "^1.31.1",
     "prisma-binding": "^2.3.9",
-    "prisma-cli": "^1.0.9"
+    "prisma-cli": "^1.0.9",
+    "sanitize-html": "^1.20.0"
   }
 }

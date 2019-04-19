@@ -16,7 +16,7 @@ const Query = {
 
   async users(parent, args, context, info) {
     // check is user is logged in and has permissions to see all users
-    return context.db.query.users({}, info) //why does info make this work???
+    return await context.db.query.users({}, info) //why does info make this work???
   },
 };
 

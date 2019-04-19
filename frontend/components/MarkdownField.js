@@ -23,6 +23,10 @@ const MarkdownTextField = styled.div`
     display: inline-block;
     padding-left: 5px;
     outline: 1px dotted lightgrey;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
   }
 `;
 
@@ -33,11 +37,11 @@ marked.setOptions({
 
 class MarkdownField extends Component {
   state = {
-    input: '',
     markdown: '',
   };
 
   inputToState = (e) => {
+    this.props.getMarkdownInput(e.target); //passed the event target to the method in parent component to write input to state in parent
     this.setState({
       [e.target.name]: e.target.value,
       markdown: marked(e.target.value),
@@ -51,9 +55,6 @@ class MarkdownField extends Component {
   render() {
     return (
       <MarkdownTextField>
-        <label htmlFor={this.props.name}>
-          {this.props.label || 'Label'}
-        </label>
         <div className='input-output'>
           <textarea
             type='text'

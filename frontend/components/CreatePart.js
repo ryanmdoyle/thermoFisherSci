@@ -90,11 +90,15 @@ class CreatePart extends Component {
     portugeseLong_pt: '',
     portugeseShort_pt: '',
     spanishLong_es: '',
-    spanishShort_es: ''
+    spanishShort_es: '',
   };
 
   saveToState = e => {
     this.setState({ [e.target.name]: e.target.value })
+  }
+
+  getMarkdownInput = (target) => {
+    this.setState({ [target.name]: target.value })
   }
 
   render() {
@@ -110,6 +114,7 @@ class CreatePart extends Component {
                   e.preventDefault();
                   createPart();
                   this.setState({})
+                  // do something to reset the state of child components
                 }
               }
             >
@@ -125,29 +130,6 @@ class CreatePart extends Component {
                 onChange={this.saveToState}
               />
               {Object.keys(this.state).map(key => {
-                if (key.toString().includes('Long')) { // creates textarea inputs for long descriptions
-                  const fieldName = key.toString();
-                  const fieldDescription = createDescription(fieldName);
-                  return (
-                    <div key={key}>
-                      <label htmlFor={fieldName}>
-                        {fieldDescription}
-                      </label>
-                      <input
-                        type='text'
-                        name={fieldName}
-                        placeholder={fieldName}
-                        value={this.state.fieldName}
-                        onChange={this.saveToState}
-                      />
-                      {/* <MarkdownField
-                        label={fieldDescription}
-                        name={fieldName}
-                        onChange={this.saveToState}
-                      /> */}
-                    </div>
-                  )
-                }
                 if (key.toString().includes('Short')) { //creates inputs for short descriptions
                   const fieldName = key.toString();
                   const fieldDescription = createDescription(fieldName);
@@ -162,6 +144,22 @@ class CreatePart extends Component {
                         placeholder={fieldName}
                         value={this.state.fieldName}
                         onChange={this.saveToState}
+                      />
+                    </div>
+                  )
+                }
+                if (key.toString().includes('Long')) { // creates textarea inputs for long descriptions
+                  const fieldName = key.toString();
+                  const fieldDescription = createDescription(fieldName);
+                  return (
+                    <div key={key}>
+                      <label htmlFor={fieldName}>
+                        {fieldDescription}
+                      </label>
+                      <MarkdownField
+                        label={fieldDescription}
+                        name={fieldName}
+                        getMarkdownInput={this.getMarkdownInput}
                       />
                     </div>
                   )

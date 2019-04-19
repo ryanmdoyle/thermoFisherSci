@@ -1,6 +1,14 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const marked = require('marked');
+const sanitizeHTML = require('sanitize-html');
+
 require('dotenv').config();
+
+marked.setOptions({
+  sanitize: true,
+  sanitizer: sanitizeHTML,
+})
 
 const Mutations = {
   async createUser(parent, args, context, info) {
@@ -19,8 +27,17 @@ const Mutations = {
   },
 
   async createPart(parent, args, context, info) {
+    const data = { ...args };
+    // get list/array of keys & use keys to convert all data to md
+    const keys = Object.keys(data);
+    keys.map(key => {
+      if (key !== 'partNumnber') {
+        data[key] = marked(data[key]);
+      }
+    })
+    //create part using data formatted in html
     const part = await context.db.mutation.createPart({
-      data: { ...args }
+      data: { ...data }
     }, info);
     return part;
   },
