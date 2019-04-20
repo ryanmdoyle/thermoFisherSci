@@ -130,14 +130,14 @@ class CreatePart extends Component {
                 onChange={this.saveToState}
               />
               {Object.keys(this.state).map(key => {
-                if (key.toString().includes('Short')) { //creates inputs for short descriptions
-                  const fieldName = key.toString();
-                  const fieldDescription = createDescription(fieldName);
-                  return (
-                    <div key={key}>
-                      <label htmlFor={fieldName}>
-                        {fieldDescription}
-                      </label>
+                const fieldName = key.toString();
+                const fieldDescription = createDescription(fieldName);
+                return (
+                  <div key={key}>
+                    <label htmlFor={fieldName}>
+                      {fieldDescription}
+                    </label>
+                    {key.toString().includes('Short') &&
                       <input
                         type='text'
                         name={fieldName}
@@ -145,25 +145,16 @@ class CreatePart extends Component {
                         value={this.state.fieldName}
                         onChange={this.saveToState}
                       />
-                    </div>
-                  )
-                }
-                if (key.toString().includes('Long')) { // creates textarea inputs for long descriptions
-                  const fieldName = key.toString();
-                  const fieldDescription = createDescription(fieldName);
-                  return (
-                    <div key={key}>
-                      <label htmlFor={fieldName}>
-                        {fieldDescription}
-                      </label>
+                    }
+                    {key.toString().includes('Long') &&
                       <MarkdownField
                         label={fieldDescription}
                         name={fieldName}
                         getMarkdownInput={this.getMarkdownInput}
                       />
-                    </div>
-                  )
-                }
+                    }
+                  </div>
+                )
               })
               }
               <input className='submit-button' type='submit' value='Create Part' key='submit-button' />
