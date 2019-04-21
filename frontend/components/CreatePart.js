@@ -3,7 +3,8 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import FormStyle from './styles/FormStyle';
 import createDescription from '../lib/createDescription';
-import MarkdownField from './MarkdownField';
+import ReactMarkdown from 'react-markdown/with-html';
+import sanitize from 'sanitize-html';
 
 const CREATE_PART_MUTATION = gql`
   mutation CREATE_PART_MUTATION(
@@ -64,8 +65,36 @@ const CREATE_PART_MUTATION = gql`
     }
   }
 `;
+
+const initialState = {
+  partNumber: '',
+  chineseLong_zh_cn: '',
+  chineseShort_zh_cn: '',
+  chineseTLong_zh_tw: '',
+  chineseTShort_zh_tw: '',
+  danishLong_da: '',
+  danishShort_da: '',
+  dutchLong_nl: '',
+  dutchShort_nl: '',
+  englishLong_en: '',
+  englishShort_en: '',
+  frenchLong_fr: '',
+  frenchShort_fr: '',
+  germanLong_de: '',
+  germanShort_de: '',
+  italianLong_it: '',
+  italianShort_it: '',
+  japaneseLong_ja: '',
+  japaneseShort_ja: '',
+  koreanLong_ko: '',
+  koreanShort_ko: '',
+  portugeseLong_pt: '',
+  portugeseShort_pt: '',
+  spanishLong_es: '',
+  spanishShort_es: '',
+};
 class CreatePart extends Component {
-  state = {
+  state = { // contains db fields for all languages.  Builds form using this as template
     partNumber: '',
     chineseLong_zh_cn: '',
     chineseShort_zh_cn: '',
@@ -94,11 +123,9 @@ class CreatePart extends Component {
   };
 
   saveToState = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
-  getMarkdownInput = (target) => {
-    this.setState({ [target.name]: target.value })
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
   }
 
   render() {
@@ -107,20 +134,19 @@ class CreatePart extends Component {
         {(createPart, { loading, error }) => (
           <React.Fragment>
             <h1>Create a New Part</h1>
-            <FormStyle
+            <FormStyle //Styles the form component with styled-components
               method='POST'
               onSubmit={
                 async e => {
                   e.preventDefault();
                   createPart();
-                  this.setState({})
-                  // do something to reset the state of child components
+                  this.setState({ ...initialState })
                 }
               }
             >
               <label htmlFor='partNumber'>
                 Part Number
-            </label>
+              </label>
               <input
                 type='text'
                 name='partNumber'
@@ -137,21 +163,29 @@ class CreatePart extends Component {
                     <label htmlFor={fieldName}>
                       {fieldDescription}
                     </label>
-                    {key.toString().includes('Short') &&
+                    {fieldName.includes('Short') && // Renders inputs for short descriptions
                       <input
                         type='text'
                         name={fieldName}
                         placeholder={fieldName}
-                        value={this.state.fieldName}
+                        value={this.state[key]}
                         onChange={this.saveToState}
                       />
                     }
-                    {key.toString().includes('Long') &&
-                      <MarkdownField
-                        label={fieldDescription}
-                        name={fieldName}
-                        getMarkdownInput={this.getMarkdownInput}
-                      />
+                    {key.toString().includes('Long') && // Renders textareas and markdown prrview for long descriptions
+                      <div>
+                        <textarea
+                          type='text'
+                          name={fieldName}
+                          placeholder={fieldName}
+                          value={this.state[fieldName]}
+                          onChange={this.saveToState}
+                        />
+                        <ReactMarkdown
+                          source={sanitize(this.state[fieldName])}
+                          escapeHtml={false}
+                        />
+                      </div>
                     }
                   </div>
                 )

@@ -31,7 +31,7 @@ const Mutations = {
     // get list/array of keys & use keys to convert all data to md
     const keys = Object.keys(data);
     keys.map(key => {
-      if (key !== 'partNumnber') {
+      if (key !== 'partNumnber' && key.includes('Long')) {
         data[key] = marked(data[key]);
       }
     })
