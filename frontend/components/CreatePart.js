@@ -143,7 +143,7 @@ class CreatePart extends Component {
                   this.setState({ ...initialState })
                 }
               }
-            >
+              >
               <label htmlFor='partNumber'>
                 Part Number
               </label>
@@ -154,7 +154,7 @@ class CreatePart extends Component {
                 placeholder='partNumber'
                 value={this.state.partNumber}
                 onChange={this.saveToState}
-              />
+                />
               {Object.keys(this.state).map(key => {
                 const fieldName = key.toString();
                 const fieldDescription = createDescription(fieldName);
@@ -165,11 +165,11 @@ class CreatePart extends Component {
                     </label>
                     {fieldName.includes('Short') && // Renders inputs for short descriptions
                       <input
-                        type='text'
-                        name={fieldName}
-                        placeholder={fieldName}
-                        value={this.state[key]}
-                        onChange={this.saveToState}
+                      type='text'
+                      name={fieldName}
+                      placeholder={fieldName}
+                      value={this.state[key]}
+                      onChange={this.saveToState}
                       />
                     }
                     {key.toString().includes('Long') && // Renders textareas and markdown prrview for long descriptions
@@ -180,17 +180,17 @@ class CreatePart extends Component {
                           placeholder={fieldName}
                           value={this.state[fieldName]}
                           onChange={this.saveToState}
-                        />
+                          />
                         <ReactMarkdown
                           source={sanitize(this.state[fieldName])}
                           escapeHtml={false}
-                        />
+                          />
                       </div>
                     }
                   </div>
                 )
               })
-              }
+            }
               <input className='submit-button' type='submit' value='Create Part' key='submit-button' />
             </FormStyle>
           </React.Fragment>
