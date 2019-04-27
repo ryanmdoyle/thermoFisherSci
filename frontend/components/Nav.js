@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import User from './User';
 import Logout from './Logout';
+import hasPermission from '../lib/hasPermission';
 
 const NavStyled = styled.nav`
   display: flex;
@@ -38,9 +39,11 @@ class Nav extends Component {
                 <Link href='/createPart'>
                   <a>Add Part</a>
                 </Link>
-                <Link href='/users'>
-                  <a>Users</a>
-                </Link>
+                {hasPermission(me, 'ADMIN') && (
+                  <Link href='/users'>
+                    <a>Users</a>
+                  </Link>
+                )}
                 <Logout />
               </>
             )}

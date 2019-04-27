@@ -5,6 +5,16 @@ import FormStyle from './styles/FormStyle';
 import createDescription from '../lib/createDescription';
 import ReactMarkdown from 'react-markdown/with-html';
 import sanitize from 'sanitize-html';
+import User from './User';
+import hasPermission from '../lib/hasPermission';
+import { PARTS_QUERY } from './Parts';
+import styled from 'styled-components';
+
+const MarkdownOutputStyled = styled.div`
+  box-sizing: border-box;
+  padding: 5px 20px;
+  background-color: #efefef;
+`;
 
 const CREATE_PART_MUTATION = gql`
   mutation CREATE_PART_MUTATION(
@@ -130,72 +140,87 @@ class CreatePart extends Component {
 
   render() {
     return (
-      <Mutation mutation={CREATE_PART_MUTATION} variables={this.state}>
-        {(createPart, { loading, error }) => (
-          <React.Fragment>
-            <h1>Create a New Part</h1>
-            <FormStyle //Styles the form component with styled-components
-              method='POST'
-              onSubmit={
-                async e => {
-                  e.preventDefault();
-                  createPart();
-                  this.setState({ ...initialState })
-                }
-              }
-              >
-              <label htmlFor='partNumber'>
-                Part Number
-              </label>
-              <input
-                type='text'
-                name='partNumber'
-                key='partNumber'
-                placeholder='partNumber'
-                value={this.state.partNumber}
-                onChange={this.saveToState}
-                />
-              {Object.keys(this.state).map(key => {
-                const fieldName = key.toString();
-                const fieldDescription = createDescription(fieldName);
-                return (
-                  <div key={key}>
-                    <label htmlFor={fieldName}>
-                      {fieldDescription}
-                    </label>
-                    {fieldName.includes('Short') && // Renders inputs for short descriptions
+      <User>
+        {({ data: { me } }) => (
+          <Mutation mutation={CREATE_PART_MUTATION} variables={this.state} refetchQueries={[{ query: PARTS_QUERY }]}>
+            {(createPart, { loading, error }) => (
+              <React.Fragment>
+                <h1>Create a New Part</h1>
+                <FormStyle //Styles the form component with styled-components
+                  method='POST'
+                  onSubmit={
+                    async e => {
+                      e.preventDefault();
+                      createPart();
+                      this.setState({ ...initialState })
+                    }
+                  }
+                >
+                  {hasPermission(me, 'CREATE') && (
+                    <>
+                      <label htmlFor='partNumber'>
+                        Part Number
+                  </label>
                       <input
-                      type='text'
-                      name={fieldName}
-                      placeholder={fieldName}
-                      value={this.state[key]}
-                      onChange={this.saveToState}
+                        type='text'
+                        name='partNumber'
+                        key='partNumber'
+                        placeholder='partNumber'
+                        value={this.state.partNumber}
+                        onChange={this.saveToState}
                       />
-                    }
-                    {key.toString().includes('Long') && // Renders textareas and markdown prrview for long descriptions
-                      <div>
-                        <textarea
-                          type='text'
-                          name={fieldName}
-                          placeholder={fieldName}
-                          value={this.state[fieldName]}
-                          onChange={this.saveToState}
+                    </>
+                  )}
+                  {Object.keys(this.state).map(key => {
+                    const fieldName = key.toString();
+                    const fieldDescription = createDescription(fieldName);
+                    return (
+                      <div key={key}>
+                        {hasPermission(me, fieldName) && (
+                          <label htmlFor={fieldName}>
+                            {fieldDescription}
+                          </label>
+                        )}
+                        {fieldName.includes('Short') && hasPermission(me, fieldName) && // Renders inputs for short descriptions
+                          <input
+                            type='text'
+                            name={fieldName}
+                            placeholder={fieldName}
+                            value={this.state[key]}
+                            onChange={this.saveToState}
                           />
-                        <ReactMarkdown
-                          source={sanitize(this.state[fieldName])}
-                          escapeHtml={false}
-                          />
+                        }
+                        {key.toString().includes('Long') && hasPermission(me, fieldName) && // Renders textareas and markdown prrview for long descriptions
+                          <div>
+                            <textarea
+                              type='text'
+                              name={fieldName}
+                              placeholder={fieldName}
+                              value={this.state[fieldName]}
+                              onChange={this.saveToState}
+                            />
+                            {this.state[fieldName] && (
+
+                            <MarkdownOutputStyled>
+                              <ReactMarkdown
+                                source={sanitize(this.state[fieldName])}
+                                escapeHtml={false}
+                              />
+                            </MarkdownOutputStyled>
+                            )}
+                          </div>
+                        }
                       </div>
-                    }
-                  </div>
-                )
-              })
-            }
-              <input className='submit-button' type='submit' value='Create Part' key='submit-button' />
-            </FormStyle>
-          </React.Fragment>
+                    )
+                  })
+                  }
+                  <input className='submit-button' type='submit' value='Create Part' key='submit-button' />
+                </FormStyle>
+              </React.Fragment>
+            )}
+          </Mutation>
         )}
-      </Mutation>
+      </User>
     );
   }
 }

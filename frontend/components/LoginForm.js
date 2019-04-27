@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Router from 'next/router';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import FormStyle from './styles/FormStyle';
@@ -33,6 +34,7 @@ class LoginForm extends Component {
             onSubmit={async e => {
               e.preventDefault();
               await signin();
+              Router.push('/parts'); //redirects to parts page after login successful
             }}
           >
             <label htmlFor='email'>Email</label>

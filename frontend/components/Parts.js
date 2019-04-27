@@ -61,3 +61,4 @@ class Parts extends Component {
 }
 
 export default Parts;
+export { PARTS_QUERY };
