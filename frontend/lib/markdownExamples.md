@@ -70,3 +70,8 @@ Links to webpages can be created by placing a decription within `[]` and followi
 [Here is a link to Google!](www.google.com)
 
 `[Here is a link to Google!](www.google.com)`
+
+## Detailed Markdown
+For more detailed markdown examples, you can check out this page:
+
+[Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
