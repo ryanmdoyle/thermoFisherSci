@@ -1,4 +1,5 @@
 export default function hasPermission(user, permissionNeeded) {
+  if (user.permissions.includes('ADMIN')) return true;
   const permissionEnum = permissionNeeded.toString().toUpperCase();
   console.log(permissionEnum);
   const userHasPermission = user.permissions.includes(permissionEnum || 'ADMIN');

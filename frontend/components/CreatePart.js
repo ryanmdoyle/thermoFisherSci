@@ -145,82 +145,85 @@ class CreatePart extends Component {
       <User>
         {({ data: { me } }) => (
           <Mutation mutation={CREATE_PART_MUTATION} variables={this.state} refetchQueries={[{ query: PARTS_QUERY }]}>
-            {(createPart, { loading, error }) => (
-              <React.Fragment>
-                <h1>Create a New Part</h1>
-                <FormStyle //Styles the form component with styled-components
-                  method='POST'
-                  onSubmit={
-                    async e => {
-                      e.preventDefault();
-                      createPart();
-                      this.setState({ ...initialState });
-                      Router.push('/parts');
+            {(createPart, { loading, error }) => {
+              if (loading) return <p>Loading...</p>
+              return (
+                <React.Fragment>
+                  <h1>Create a New Part</h1>
+                  <FormStyle //Styles the form component with styled-components
+                    method='POST'
+                    onSubmit={
+                      async e => {
+                        e.preventDefault();
+                        createPart();
+                        this.setState({ ...initialState });
+                        Router.push('/parts');
+                      }
                     }
-                  }
-                >
-                  {hasPermission(me, 'CREATE') && (
-                    <>
-                      <label htmlFor='partNumber'>
-                        Part Number
+                  >
+                    {hasPermission(me, 'CREATE') && (
+                      <>
+                        <label htmlFor='partNumber'>
+                          Part Number
                   </label>
-                      <input
-                        type='text'
-                        name='partNumber'
-                        key='partNumber'
-                        placeholder='partNumber'
-                        value={this.state.partNumber}
-                        onChange={this.saveToState}
-                      />
-                    </>
-                  )}
-                  {Object.keys(this.state).map(key => {
-                    const fieldName = key.toString();
-                    const fieldDescription = createDescription(fieldName);
-                    return (
-                      <div key={key}>
-                        {hasPermission(me, fieldName) && (
-                          <label htmlFor={fieldName}>
-                            {fieldDescription}
-                          </label>
-                        )}
-                        {fieldName.includes('Short') && hasPermission(me, fieldName) && // Renders inputs for short descriptions
-                          <input
-                            type='text'
-                            name={fieldName}
-                            placeholder={fieldName}
-                            value={this.state[key]}
-                            onChange={this.saveToState}
-                          />
-                        }
-                        {key.toString().includes('Long') && hasPermission(me, fieldName) && // Renders textareas and markdown prrview for long descriptions
-                          <div>
-                            <textarea
+                        <input
+                          type='text'
+                          name='partNumber'
+                          key='partNumber'
+                          placeholder='partNumber'
+                          value={this.state.partNumber}
+                          onChange={this.saveToState}
+                        />
+                      </>
+                    )}
+                    {Object.keys(this.state).map(key => {
+                      const fieldName = key.toString();
+                      const fieldDescription = createDescription(fieldName);
+                      return (
+                        <div key={key}>
+                          {hasPermission(me, fieldName) && (
+                            <label htmlFor={fieldName}>
+                              {fieldDescription}
+                            </label>
+                          )}
+                          {fieldName.includes('Short') && hasPermission(me, fieldName) && // Renders inputs for short descriptions
+                            <input
                               type='text'
                               name={fieldName}
                               placeholder={fieldName}
-                              value={this.state[fieldName]}
+                              value={this.state[key]}
                               onChange={this.saveToState}
                             />
-                            {this.state[fieldName] && (
+                          }
+                          {key.toString().includes('Long') && hasPermission(me, fieldName) && // Renders textareas and markdown prrview for long descriptions
+                            <div>
+                              <textarea
+                                type='text'
+                                name={fieldName}
+                                placeholder={fieldName}
+                                value={this.state[fieldName]}
+                                onChange={this.saveToState}
+                              />
+                              {this.state[fieldName] && (
 
-                              <MarkdownOutputStyled>
-                                <ReactMarkdown
-                                  source={sanitize(this.state[fieldName])}
-                                  escapeHtml={false}
-                                />
-                              </MarkdownOutputStyled>
-                            )}
-                          </div>
-                        }
-                      </div>
-                    )
-                  })
-                  }
-                  <input className='submit-button' type='submit' value='Create Part' key='submit-button' />
-                </FormStyle>
-              </React.Fragment>
-            )}
+                                <MarkdownOutputStyled>
+                                  <ReactMarkdown
+                                    source={sanitize(this.state[fieldName])}
+                                    escapeHtml={false}
+                                  />
+                                </MarkdownOutputStyled>
+                              )}
+                            </div>
+                          }
+                        </div>
+                      )
+                    })
+                    }
+                    <input className='submit-button' type='submit' value='Create Part' key='submit-button' />
+                  </FormStyle>
+                </React.Fragment>
+              )
+            }}
           </Mutation>
         )}
       </User>

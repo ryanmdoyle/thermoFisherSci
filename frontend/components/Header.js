@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import Nav from './Nav';
+import Router from 'next/router';
+import nprogress from 'nprogress'
+
+Router.onRouteChangeStart = () => {
+  nprogress.start();
+}
+Router.onRouteChangeComplete = () => {
+  nprogress.done();
+}
+Router.onRouteChangeError = () => {
+  nprogress.done();
+}
 
 const Head = styled.nav`
   display: flex;
