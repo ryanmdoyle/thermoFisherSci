@@ -1,6 +1,38 @@
 import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import styled from 'styled-components';
+
+const PartStyled = styled.div`
+  .part-container {
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    margin-bottom: 1rem;
+    padding: 0.2rem 1rem 0.5rem 1rem;
+  }
+  .part-container:hover {
+    background-color: #efefef;
+  }
+  .part-header {
+    display: flex;
+  }
+  .part-header__number {
+    width: 15%;
+  }
+  .part-header__description {
+    width: 85%;
+  }
+  @media screen and (max-width:600px) {
+    .part-header__number {
+      width: 25%;
+    }
+    .part-header__description {
+      width: 75%;
+    }
+  }
+  
+`;
 
 const PARTS_QUERY = gql`
 
@@ -46,13 +78,15 @@ class Parts extends Component {
           <div>
             <h1>Parts</h1>
             {data.parts.map((part, index) => (
-              <div key={part.id}>
-                <h3>{part.partNumber}</h3>
-                <p>{part.englishShort_en}</p>
-                <p>{part.englishLong_en}</p>
-              </div>
+              <PartStyled key={part.id}>
+                <div className='part-container'>
+                  <div className='part-header'>
+                    <h4 className='part-header__number'>{part.partNumber}</h4>
+                    <h4 className='part-header__description'>{part.englishShort_en}</h4>
+                  </div>
+                </div>
+              </PartStyled>
             ))}
-            <hr></hr>
           </div>
         )}
       </Query>

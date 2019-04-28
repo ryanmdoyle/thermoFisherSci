@@ -9,6 +9,7 @@ import User from './User';
 import hasPermission from '../lib/hasPermission';
 import { PARTS_QUERY } from './Parts';
 import styled from 'styled-components';
+import Router from 'next/router';
 
 const MarkdownOutputStyled = styled.div`
   box-sizing: border-box;
@@ -105,7 +106,7 @@ const initialState = {
 };
 class CreatePart extends Component {
   // state contains db fields for all languages. Form is built/ordered based on state object
-  state = { 
+  state = {
     partNumber: '',
     chineseShort_zh_cn: '',
     chineseLong_zh_cn: '',
@@ -153,7 +154,8 @@ class CreatePart extends Component {
                     async e => {
                       e.preventDefault();
                       createPart();
-                      this.setState({ ...initialState })
+                      this.setState({ ...initialState });
+                      Router.push('/parts');
                     }
                   }
                 >
@@ -202,12 +204,12 @@ class CreatePart extends Component {
                             />
                             {this.state[fieldName] && (
 
-                            <MarkdownOutputStyled>
-                              <ReactMarkdown
-                                source={sanitize(this.state[fieldName])}
-                                escapeHtml={false}
-                              />
-                            </MarkdownOutputStyled>
+                              <MarkdownOutputStyled>
+                                <ReactMarkdown
+                                  source={sanitize(this.state[fieldName])}
+                                  escapeHtml={false}
+                                />
+                              </MarkdownOutputStyled>
                             )}
                           </div>
                         }
