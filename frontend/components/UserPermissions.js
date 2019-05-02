@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import hasPermission from '../lib/hasPermission';
+
 const DropdownStyled = styled.div`
   .user__container {
     box-sizing: border-box;
@@ -105,21 +107,14 @@ class UserPermissions extends Component {
         <div className='user__container'>
           <h4  onClick={() => this.togglePermissions()}>
             {this.state.showPermissions ? <i className='up'></i>:  <i className='down'></i>}
-            {this.props.name}
+            {this.props.user.name}
           </h4>
           {this.state.showPermissions && 
             <ul>
-             {permissionsList.map(permission => {
-               return (
-                  <>
-                    {/* {(permission == this.props.permissions.includes(permission)) && <label><input type='checkbox' checked></input>{permission}</label>} */}
-                    {console.log(permission)}
-                    {console.log(this.props.permissions)}
-                    {/* <label><input type='checkbox'></input>{permission}</label> */}
-                    <br></br>
-                  </>
-               )
-             })}
+              {permissionsList.map(permission => {
+                  {hasPermission(this.props.user, permission) ? <><label><input type='checkbox' checked></input>{permission}</label><br></br></> : <><label><input type='checkbox'></input>{permission}</label><br></br></>}
+              })}
+              
             </ul>
           }
         </div> 

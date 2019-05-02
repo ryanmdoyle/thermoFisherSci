@@ -23,7 +23,7 @@ class Users extends Component {
             <h1>Users</h1>
             {data.users.map((user, index) => (
               <div key={user.id}>
-                <UserPermissions name={user.name} permissions={user.permissions} />
+                <UserPermissions user={user} />
               </div>
             ))}
           </div>
