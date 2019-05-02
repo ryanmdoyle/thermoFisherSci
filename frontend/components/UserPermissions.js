@@ -53,9 +53,44 @@ const DropdownStyled = styled.div`
   }
 `;
 
+const permissionsList = [
+  'ADMIN',
+  'USER',
+  'CREATE',
+  'UPDATE',
+  'DELETE',
+  'EXPORT',
+  'PERMISSIONUPDATE',
+  'CHINESELONG_ZH_CN',
+  'CHINESESHORT_ZH_CN',
+  'CHINESETLONG_ZH_TW',
+  'CHINESETSHORT_ZH_TW',
+  'DANISHLONG_DA',
+  'DANISHSHORT_DA',
+  'DUTCHLONG_NL',
+  'DUTCHSHORT_NL',
+  'ENGLISHLONG_EN',
+  'ENGLISHSHORT_EN',
+  'FRENCHLONG_FR',
+  'FRENCHSHORT_FR',
+  'GERMANLONG_DE',
+  'GERMANSHORT_DE',
+  'ITALIANLONG_IT',
+  'ITALIANSHORT_IT',
+  'JAPANESELONG_JA',
+  'JAPANESESHORT_JA',
+  'KOREANLONG_KO',
+  'KOREANSHORT_KO',
+  'PORTUGESELONG_PT',
+  'PORTUGESESHORT_PT',
+  'SPANISHLONG_ES',
+  'SPANISHSHORT_ES',
+];
+
 class UserPermissions extends Component {
   state = {
     showPermissions: false,
+    
   }
 
   togglePermissions = () => {
@@ -74,12 +109,15 @@ class UserPermissions extends Component {
           </h4>
           {this.state.showPermissions && 
             <ul>
-             {this.props.permissions.map(permission => {
+             {permissionsList.map(permission => {
                return (
-                 <>
-                  <label><input type='checkbox'></input>{permission}</label>
-                  <br></br>
-                 </>
+                  <>
+                    {/* {(permission == this.props.permissions.includes(permission)) && <label><input type='checkbox' checked></input>{permission}</label>} */}
+                    {console.log(permission)}
+                    {console.log(this.props.permissions)}
+                    {/* <label><input type='checkbox'></input>{permission}</label> */}
+                    <br></br>
+                  </>
                )
              })}
             </ul>

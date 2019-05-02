@@ -75,21 +75,24 @@ class Parts extends Component {
   render() {
     return (
       <Query query={PARTS_QUERY} variables={{ "$partNumber": "0001" }}>
-        {({ data: data }) => (
-          <div>
-            <h1>Parts</h1>
-            {data.parts.map((part, index) => (
-              <PartStyled key={part.id}>
-                <div className='part-container'>
-                  <div className='part-header'>
-                    <h4 className='part-header__number'>{part.partNumber}</h4>
-                    <h4 className='part-header__description'>{part.englishShort_en}</h4>
+        {({ loading, data }) => {
+          if (loading) return <p>Loading...</p>
+          return (
+            <div>
+              <h1>Parts</h1>
+              {data.parts.map((part, index) => (
+                <PartStyled key={part.id}>
+                  <div className='part-container'>
+                    <div className='part-header'>
+                      <h4 className='part-header__number'>{part.partNumber}</h4>
+                      <h4 className='part-header__description'>{part.englishShort_en}</h4>
+                    </div>
                   </div>
-                </div>
-              </PartStyled>
-            ))}
-          </div>
-        )}
+                </PartStyled>
+              ))}
+            </div>
+          )
+        }}
       </Query>
     );
   }
