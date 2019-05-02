@@ -1,10 +1,13 @@
 import React from 'react';
 import Users from '../components/Users';
-import UserPermissions from '../UserPermissions';
+import UserPermissions from '../components/UserPermissions';
 
 const parts = (props) => {
   return (
-    <Users />
+    <>
+      <Users />
+      <UserPermissions />
+    </>
   );
 };
 
