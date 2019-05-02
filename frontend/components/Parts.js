@@ -6,13 +6,14 @@ import styled from 'styled-components';
 const PartStyled = styled.div`
   .part-container {
     box-sizing: border-box;
-    border: 1px solid black;
+    box-shadow: 0 0 0rem 0.07rem ${props => props.theme.black};
     border-radius: 0.2rem;
     margin-bottom: 1rem;
     padding: 0.2rem 1rem 0.5rem 1rem;
   }
   .part-container:hover {
-    background-color: #efefef;
+    border: none;
+    box-shadow: 0 0 0.2rem 0.1rem ${props => props.theme.red};
   }
   .part-header {
     display: flex;
