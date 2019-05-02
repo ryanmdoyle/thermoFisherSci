@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import UserPermissions from "./UserPermissions";
 
 const USERS_QUERY = gql`
 
@@ -8,6 +9,7 @@ const USERS_QUERY = gql`
     users {
       id
       name
+      permissions
     }
 }
 
@@ -21,8 +23,7 @@ class Users extends Component {
             <h1>Users</h1>
             {data.users.map((user, index) => (
               <div key={user.id}>
-                <h3>{user.name}</h3>
-                <p>{`ID: ${user.id}`}</p>
+                <UserPermissions name={user.name} permissions={user.permissions} />
               </div>
             ))}
           </div>

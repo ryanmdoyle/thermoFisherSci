@@ -6,7 +6,6 @@ const parts = (props) => {
   return (
     <>
       <Users />
-      <UserPermissions />
     </>
   );
 };

@@ -45,13 +45,10 @@ class UserPermissions extends Component {
     return (
       <DropdownStyled>
         <div className='user__container' onClick={() => this.togglePermissions()}>
-          <h4>This is the user name</h4>
+          <h4>{this.props.name}</h4>
           {this.state.showPermissions && 
             <ul>
-              <li>Permission 1</li>
-              <li>Permission 1</li>
-              <li>Permission 1</li>
-              <li>Permission 1</li>
+             {this.props.permissions}
             </ul>
           }
         </div> 
