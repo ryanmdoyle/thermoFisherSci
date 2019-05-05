@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import { Mutation } from 'react-apollo'
 import styled from 'styled-components';
+import gql from 'graphql-tag';
 
 import hasPermission from '../lib/hasPermission';
 import permissionDescription from '../lib/permissionDescription';
 
 const UlStyled = styled.ul`
+  margin-top: 0;
   border-top: 1px solid black;
   padding: 1rem 0.2rem 0.2rem 2rem;
+  input {
+    height:1.2rem;
+  }
 `;
 
 const ButtonStyled = styled.button`
@@ -16,6 +22,15 @@ const ButtonStyled = styled.button`
   background-color: ${props => props.theme.red};
   color: white;
   border: none;
+`;
+
+//permissions must be conveted to string and parsed on server into object.
+const UPDATE_PERMISSIONS_MUTATION = gql`
+  mutation UPDATE_PERMISSIONS_MUTATION($id: String, $permissions: Permission) {
+    updateUserPermissions(id: $id, permissions: $permissions) {
+      id
+    }
+  }
 `;
 
 class PermissionsCheckboxList extends Component {
@@ -65,7 +80,8 @@ class PermissionsCheckboxList extends Component {
 
   checkboxToggle = (permission) => {
     this.setState({
-      [permission]: !this.state[permission]
+      [permission]: !this.state[permission],
+      id: this.props.user.id
     })
   }
 
@@ -74,16 +90,22 @@ class PermissionsCheckboxList extends Component {
 
     return (
       <>
-      <UlStyled>
-        {Object.keys(this.state).map(permission => {
-          if (this.state[permission]) {
-            return <><label key={permission}><input type='checkbox' checked onClick={() => {this.checkboxToggle(permission)}}></input>{permissionDescription(permission)}</label><br></br></>
-          } else {
-            return <><label key={permission}><input type='checkbox' onClick={() => {this.checkboxToggle(permission)}}></input>{permissionDescription(permission)}</label><br></br></>
-          }
-        })} 
-      </UlStyled>
-      <ButtonStyled onClick={console.log('do the update')}>Update</ButtonStyled>
+        <Mutation mutation={UPDATE_PERMISSIONS_MUTATION} variables={{ id: this.props.user.id, permissions: this.state }}>
+          {(update, { data }) => (
+            <>
+              <UlStyled>
+                {Object.keys(this.state).map(permission => {
+                  if (this.state[permission]) {
+                    return <><label key={permission}><input type='checkbox' checked onClick={() => { this.checkboxToggle(permission) }}></input>{permissionDescription(permission)}</label><br></br></>
+                  } else {
+                    return <><label key={permission}><input type='checkbox' onClick={() => { this.checkboxToggle(permission) }}></input>{permissionDescription(permission)}</label><br></br></>
+                  }
+                })}
+              </UlStyled>
+              <ButtonStyled onClick={() => { update() }}>Update</ButtonStyled>
+            </>
+          )}
+        </Mutation>
       </>
     );
   }

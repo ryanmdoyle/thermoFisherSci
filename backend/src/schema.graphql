@@ -52,6 +52,11 @@ type Mutation {
     spanishLong_es: String
     spanishShort_es: String
   ): Part!
+
+  updateUserPermissions(
+    id: String
+    permissions: Permissions
+  ): User!
 }
 
 type Edits {
@@ -61,4 +66,38 @@ type Edits {
 
 type SuccessMessage {
   message: String
+}
+
+type Permission {
+  ADMIN: Boolean,
+  USER: Boolean,
+  CREATE: Boolean,
+  UPDATE: Boolean,
+  DELETE: Boolean,
+  EXPORT: Boolean,
+  PERMISSIONUPDATE: Boolean,
+  CHINESELONG_ZH_CN: Boolean,
+  CHINESESHORT_ZH_CN: Boolean,
+  CHINESETLONG_ZH_TW: Boolean,
+  CHINESETSHORT_ZH_TW: Boolean,
+  DANISHLONG_DA: Boolean,
+  DANISHSHORT_DA: Boolean,
+  DUTCHLONG_NL: Boolean,
+  DUTCHSHORT_NL: Boolean,
+  ENGLISHLONG_EN: Boolean,
+  ENGLISHSHORT_EN: Boolean,
+  FRENCHLONG_FR: Boolean,
+  FRENCHSHORT_FR: Boolean,
+  GERMANLONG_DE: Boolean,
+  GERMANSHORT_DE: Boolean,
+  ITALIANLONG_IT: Boolean,
+  ITALIANSHORT_IT: Boolean,
+  JAPANESELONG_JA: Boolean,
+  JAPANESESHORT_JA: Boolean,
+  KOREANLONG_KO: Boolean,
+  KOREANSHORT_KO: Boolean,
+  PORTUGESELONG_PT: Boolean,
+  PORTUGESESHORT_PT: Boolean,
+  SPANISHLONG_ES: Boolean,
+  SPANISHSHORT_ES: Boolean,
 }

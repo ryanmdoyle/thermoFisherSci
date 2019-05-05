@@ -26,6 +26,10 @@ const Mutations = {
     return user;
   },
 
+  async updateUserPermissions(parent, args, ctx, info) {
+    console.log(args);
+  },
+
   async createPart(parent, args, context, info) {
     const data = { ...args };
     // get list/array of keys & use keys to convert all data to md
