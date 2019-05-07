@@ -27,7 +27,16 @@ const Mutations = {
   },
 
   async updateUserPermissions(parent, args, ctx, info) {
-    console.log(args);
+    const { permissions } = args;
+    const userId = ctx.req.userId;
+    console.log(permissions);
+    const updatedUser = await ctx.db.mutation.updateUser(
+      {
+        data: { permissions: { set: permissions } },
+        where: { id: userId }, // this data type is already defined in Prisma and needs to be used there.
+      }, info
+    );
+    return updatedUser;
   },
 
   async createPart(parent, args, context, info) {

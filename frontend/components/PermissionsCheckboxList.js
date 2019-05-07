@@ -26,8 +26,8 @@ const ButtonStyled = styled.button`
 
 //permissions must be conveted to string and parsed on server into object.
 const UPDATE_PERMISSIONS_MUTATION = gql`
-  mutation UPDATE_PERMISSIONS_MUTATION($id: String, $permissions: Permission) {
-    updateUserPermissions(id: $id, permissions: $permissions) {
+  mutation UPDATE_PERMISSIONS_MUTATION($permissions: [Permission!]) {
+    updateUserPermissions(permissions: $permissions) {
       id
     }
   }
@@ -90,7 +90,7 @@ class PermissionsCheckboxList extends Component {
 
     return (
       <>
-        <Mutation mutation={UPDATE_PERMISSIONS_MUTATION} variables={{ id: this.props.user.id, permissions: this.state }}>
+        <Mutation mutation={UPDATE_PERMISSIONS_MUTATION} variables={{ permissions: this.state, id: this.props.user.id }}>
           {(update, { data }) => (
             <>
               <UlStyled>
