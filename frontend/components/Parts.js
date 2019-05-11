@@ -3,33 +3,49 @@ import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 
+import DropdownStyled from './styles/DropdownStyled';
+
 const PartStyled = styled.div`
   .part-container {
     box-sizing: border-box;
     box-shadow: 0 0 0rem 0.07rem ${props => props.theme.black};
     border-radius: 0.2rem;
     margin-bottom: 1rem;
-    padding: 0.2rem 1rem 0.5rem 1rem;
+    padding: 0 1rem 0 1rem;
+    transition: transform 0.2s;
   }
   .part-container:hover {
+    z-index: 300;
     border: none;
     box-shadow: 0 0 0.2rem 0.1rem ${props => props.theme.red};
+    transform: scale(1.01);
+    transition: transform 0.2s;
   }
+
+  h4 {
+    margin: 0 0;
+    padding: 1rem 0;
+  }
+
   .part-header {
     display: flex;
   }
   .part-header__number {
-    width: 15%;
+    width: 20%;
+    transition: width 1s;
   }
   .part-header__description {
-    width: 85%;
+    width: 80%;
+    transition: width 1s;
   }
   @media screen and (max-width:600px) {
     .part-header__number {
-      width: 25%;
+      width: 30%;
+      transition: width 1s;
     }
     .part-header__description {
-      width: 75%;
+      width: 70%;
+      transition: width 1s;
     }
   }
   
@@ -72,6 +88,16 @@ const PARTS_QUERY = gql`
 
 `;
 class Parts extends Component {
+  state = {
+    showPermissions: false,
+  }
+
+  togglePermissions = () => {
+    this.setState({
+      showPermissions: !this.state.showPermissions
+    })
+  }
+
   render() {
     return (
       <Query query={PARTS_QUERY} variables={{ "$partNumber": "0001" }}>
@@ -81,14 +107,16 @@ class Parts extends Component {
             <div>
               <h1>Parts</h1>
               {data.parts.map((part, index) => (
-                <PartStyled key={part.id}>
-                  <div className='part-container'>
-                    <div className='part-header'>
-                      <h4 className='part-header__number'>{part.partNumber}</h4>
-                      <h4 className='part-header__description'>{part.englishShort_en}</h4>
+                <>
+                  <PartStyled key={part.id}>
+                    <div className='part-container'>
+                      <div className='part-header'>
+                        <h4 className='part-header__number'>{part.partNumber}</h4>
+                        <p className='part-header__description'>{part.englishShort_en}</p>
+                      </div>
                     </div>
-                  </div>
-                </PartStyled>
+                  </PartStyled>
+                </>
               ))}
             </div>
           )
