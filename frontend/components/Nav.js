@@ -40,9 +40,14 @@ class Nav extends Component {
                   <a>Add Part</a>
                 </Link>
                 {hasPermission(me, 'ADMIN') && (
-                  <Link href='/users'>
-                    <a>Users</a>
-                  </Link>
+                  <>
+                    <Link href='/users'>
+                      <a>Users</a>
+                    </Link>
+                    <Link href='/download'>
+                      <a>Download</a>
+                    </Link>
+                  </>
                 )}
                 <Logout />
               </>
