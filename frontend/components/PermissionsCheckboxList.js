@@ -22,6 +22,7 @@ const ButtonStyled = styled.button`
   background-color: ${props => props.theme.red};
   color: white;
   border: none;
+  font-size: 1rem;
 `;
 
 //permissions must be conveted to string and parsed on server into object.
@@ -102,7 +103,7 @@ class PermissionsCheckboxList extends Component {
                   }
                 })}
               </UlStyled>
-              <ButtonStyled onClick={() => { update() }}>Update</ButtonStyled>
+              <ButtonStyled onClick={() => { update() }}>Update Permissions</ButtonStyled>
             </>
           )}
         </Mutation>
