@@ -174,6 +174,7 @@ class CreatePart extends Component {
                           value={this.state.partNumber}
                           onChange={this.saveToState}
                         />
+                        <hr style={{ margin: '2rem 4rem 1rem 4rem' }}></hr>
                       </>
                     )}
                     {Object.keys(this.state).map(key => {
@@ -196,7 +197,7 @@ class CreatePart extends Component {
                             />
                           }
                           {key.toString().includes('Long') && hasPermission(me, fieldName) && // Renders textareas and markdown prrview for long descriptions
-                            <div>
+                            <div style={{minHeight: '70px'}}>
                               <textarea
                                 type='text'
                                 name={fieldName}

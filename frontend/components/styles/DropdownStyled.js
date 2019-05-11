@@ -7,11 +7,14 @@ const DropdownStyled = styled.div`
     border-radius: 0.2rem;
     margin-bottom: 1rem;
     padding: 0 1rem 0 1rem;
+    transition: transform 0.2s;
   }
   .dropdown:hover {
     z-index: 300;
     border: none;
     box-shadow: 0 0 0.2rem 0.1rem ${props => props.theme.red};
+    transform: scale(1.01);
+    transition: transform 0.2s;
   }
 
   .dropdown__details {

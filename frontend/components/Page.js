@@ -10,7 +10,7 @@ const theme = {
   black: '#333333',
   red: '#EE3033',
   blue: '#1D8AE7',
-  maxWidth: 900
+  maxWidth: '900px',
 };
 
 const GlobalStyle = createGlobalStyle`
