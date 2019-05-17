@@ -34,55 +34,57 @@ const UPDATE_PERMISSIONS_MUTATION = gql`
   }
 `;
 
+const possiblePermissions = [
+  'ADMIN',
+  'USER',
+  'CREATE',
+  'UPDATE',
+  'DELETE',
+  'EXPORT',
+  'PERMISSIONUPDATE',
+  'CHINESELONG_ZH_CN',
+  'CHINESESHORT_ZH_CN',
+  'CHINESETLONG_ZH_TW',
+  'CHINESETSHORT_ZH_TW',
+  'DANISHLONG_DA',
+  'DANISHSHORT_DA',
+  'DUTCHLONG_NL',
+  'DUTCHSHORT_NL',
+  'ENGLISHLONG_EN',
+  'ENGLISHSHORT_EN',
+  'FRENCHLONG_FR',
+  'FRENCHSHORT_FR',
+  'GERMANLONG_DE',
+  'GERMANSHORT_DE',
+  'ITALIANLONG_IT',
+  'ITALIANSHORT_IT',
+  'JAPANESELONG_JA',
+  'JAPANESESHORT_JA',
+  'KOREANLONG_KO',
+  'KOREANSHORT_KO',
+  'PORTUGESELONG_PT',
+  'PORTUGESESHORT_PT',
+  'SPANISHLONG_ES',
+  'SPANISHSHORT_ES',
+];
+
 class PermissionsCheckboxList extends Component {
+
   state = {
-    ADMIN: false,
-    USER: false,
-    CREATE: false,
-    UPDATE: false,
-    DELETE: false,
-    EXPORT: false,
-    PERMISSIONUPDATE: false,
-    CHINESELONG_ZH_CN: false,
-    CHINESESHORT_ZH_CN: false,
-    CHINESETLONG_ZH_TW: false,
-    CHINESETSHORT_ZH_TW: false,
-    DANISHLONG_DA: false,
-    DANISHSHORT_DA: false,
-    DUTCHLONG_NL: false,
-    DUTCHSHORT_NL: false,
-    ENGLISHLONG_EN: false,
-    ENGLISHSHORT_EN: false,
-    FRENCHLONG_FR: false,
-    FRENCHSHORT_FR: false,
-    GERMANLONG_DE: false,
-    GERMANSHORT_DE: false,
-    ITALIANLONG_IT: false,
-    ITALIANSHORT_IT: false,
-    JAPANESELONG_JA: false,
-    JAPANESESHORT_JA: false,
-    KOREANLONG_KO: false,
-    KOREANSHORT_KO: false,
-    PORTUGESELONG_PT: false,
-    PORTUGESESHORT_PT: false,
-    SPANISHLONG_ES: false,
-    SPANISHSHORT_ES: false,
-  }
+    permissions: this.props.user.permissions,
+  };
 
-  componentWillMount() {
-    Object.keys(this.state).map(permission => {
-      if (hasPermission(this.props.user, permission)) {
-        this.setState({
-          [permission]: !this.state[permission]
-        })
-      }
-    })
-  }
-
-  checkboxToggle = (permission) => {
+  checkboxToggle = (e) => {
+    console.log(e.target.value);
+    const permissionCheckbox = e.target;
+    let updatedPermissions = [...this.state.permissions];
+    if (permissionCheckbox.checked) {
+      updatedPermissions.push(permissionCheckbox.value);
+    } else {
+      updatedPermissions = updatedPermissions.filter(permission => permission !== permissionCheckbox.value);
+    }
     this.setState({
-      [permission]: !this.state[permission],
-      id: this.props.user.id
+      permissions: updatedPermissions,
     })
   }
 
@@ -95,12 +97,21 @@ class PermissionsCheckboxList extends Component {
           {(update, { data }) => (
             <>
               <UlStyled>
-                {Object.keys(this.state).map(permission => {
-                  if (this.state[permission]) {
-                    return <><label key={permission}><input type='checkbox' checked onClick={() => { this.checkboxToggle(permission) }}></input>{permissionDescription(permission)}</label><br></br></>
-                  } else {
-                    return <><label key={permission}><input type='checkbox' onClick={() => { this.checkboxToggle(permission) }}></input>{permissionDescription(permission)}</label><br></br></>
-                  }
+                {possiblePermissions.map(permission => {
+                  return (
+                    <div key={permission}>
+                      <label>
+                        <input
+                          type='checkbox'
+                          value={permission}
+                          checked={this.state.permissions.includes(permission)}
+                          onClick={this.checkboxToggle}></input>
+                        {/* permissionsDescription transforms the DB name to readable description */}
+                        {permissionDescription(permission)}
+                      </label>
+                      <br></br>
+                    </div>
+                  )
                 })}
               </UlStyled>
               <ButtonStyled onClick={() => { update() }}>Update Permissions</ButtonStyled>
