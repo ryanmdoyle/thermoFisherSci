@@ -4,6 +4,8 @@ import { Query } from 'react-apollo';
 import { Parser } from 'json2csv';
 import { PARTS_QUERY } from './Parts';
 
+import ButtonStyled from './styles/ButtonStyled';
+
 class Download extends Component {
   download = (parts) => {
     const headers = Object.keys(parts[0]); // gets headers from first object
@@ -27,9 +29,9 @@ class Download extends Component {
       <Query query={PARTS_QUERY}>
         {({ data: { parts } }) => {
           return (
-            <button onClick={() => { this.download(parts) }}>
+            <ButtonStyled onClick={() => { this.download(parts) }}>
               Download!
-            </button>
+            </ButtonStyled>
           )
         }}
       </Query>

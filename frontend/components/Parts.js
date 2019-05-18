@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 import DropdownStyled from './styles/DropdownStyled';
 import MarkdownView from './MarkdownView';
@@ -115,6 +116,9 @@ class Parts extends Component {
                         {/* <MarkdownView html={part.englishLong_en} /> */}
                         <h4 className='part-header__number'>{part.partNumber}</h4>
                         <p className='part-header__description'>{part.englishShort_en}</p>
+                        <Link href={{ pathname: '/part', query: { id: part.id } }}>
+                          <a>{part.id}</a>
+                        </Link>
                       </div>
                     </div>
                   </PartStyled>
