@@ -80,30 +80,30 @@ const CREATE_PART_MUTATION = gql`
 
 const initialState = {
   partNumber: '',
-  chineseLong_zh_cn: '',
   chineseShort_zh_cn: '',
-  chineseTLong_zh_tw: '',
+  chineseLong_zh_cn: '',
   chineseTShort_zh_tw: '',
-  danishLong_da: '',
+  chineseTLong_zh_tw: '',
   danishShort_da: '',
-  dutchLong_nl: '',
+  danishLong_da: '',
   dutchShort_nl: '',
-  englishLong_en: '',
+  dutchLong_nl: '',
   englishShort_en: '',
-  frenchLong_fr: '',
+  englishLong_en: '',
   frenchShort_fr: '',
-  germanLong_de: '',
+  frenchLong_fr: '',
   germanShort_de: '',
-  italianLong_it: '',
+  germanLong_de: '',
   italianShort_it: '',
-  japaneseLong_ja: '',
+  italianLong_it: '',
   japaneseShort_ja: '',
-  koreanLong_ko: '',
+  japaneseLong_ja: '',
   koreanShort_ko: '',
-  portugeseLong_pt: '',
+  koreanLong_ko: '',
   portugeseShort_pt: '',
-  spanishLong_es: '',
+  portugeseLong_pt: '',
   spanishShort_es: '',
+  spanishLong_es: '',
 };
 class CreatePart extends Component {
   // state contains db fields for all languages. Form is built/ordered based on state object
@@ -234,3 +234,4 @@ class CreatePart extends Component {
 }
 
 export default CreatePart;
+export { initialState };

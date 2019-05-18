@@ -9,6 +9,8 @@ const Query = {
       where: { id: context.req.userId }
     }, info);
   },
+  
+  part: forwardTo('db'),
 
   async parts(parent, args, context, info) {
     return context.db.query.parts()
