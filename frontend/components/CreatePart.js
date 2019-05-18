@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import FormStyle from './styles/FormStyle';
-import createDescription from '../lib/createDescription';
 import ReactMarkdown from 'react-markdown/with-html';
 import sanitize from 'sanitize-html';
-import User from './User';
-import hasPermission from '../lib/hasPermission';
-import { PARTS_QUERY } from './Parts';
 import styled from 'styled-components';
 import Router from 'next/router';
+
+import { PARTS_QUERY } from './Parts';
+import FormStyle from './styles/FormStyle';
+import createDescription from '../lib/createDescription';
+import User from './User';
+import hasPermission from '../lib/hasPermission';
 
 const MarkdownOutputStyled = styled.div`
   box-sizing: border-box;
@@ -197,7 +198,7 @@ class CreatePart extends Component {
                             />
                           }
                           {key.toString().includes('Long') && hasPermission(me, fieldName) && // Renders textareas and markdown prrview for long descriptions
-                            <div style={{minHeight: '70px'}}>
+                            <div style={{ minHeight: '70px' }}>
                               <textarea
                                 type='text'
                                 name={fieldName}

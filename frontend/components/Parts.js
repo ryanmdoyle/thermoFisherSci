@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import styled from 'styled-components';
 
 import DropdownStyled from './styles/DropdownStyled';
+import MarkdownView from './MarkdownView';
 
 const PartStyled = styled.div`
   .part-container {
@@ -107,16 +108,17 @@ class Parts extends Component {
             <div>
               <h1>Parts</h1>
               {data.parts.map((part, index) => (
-                <>
+                <div key={part.id}>
                   <PartStyled key={part.id}>
                     <div className='part-container'>
                       <div className='part-header'>
+                        {/* <MarkdownView html={part.englishLong_en} /> */}
                         <h4 className='part-header__number'>{part.partNumber}</h4>
                         <p className='part-header__description'>{part.englishShort_en}</p>
                       </div>
                     </div>
                   </PartStyled>
-                </>
+                </div>
               ))}
             </div>
           )
