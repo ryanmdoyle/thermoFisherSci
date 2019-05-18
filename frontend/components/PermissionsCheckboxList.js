@@ -75,7 +75,6 @@ class PermissionsCheckboxList extends Component {
   };
 
   checkboxToggle = (e) => {
-    console.log(e.target.value);
     const permissionCheckbox = e.target;
     let updatedPermissions = [...this.state.permissions];
     if (permissionCheckbox.checked) {
@@ -93,7 +92,7 @@ class PermissionsCheckboxList extends Component {
 
     return (
       <>
-        <Mutation mutation={UPDATE_PERMISSIONS_MUTATION} variables={{ permissions: this.state, id: this.props.user.id }}>
+        <Mutation mutation={UPDATE_PERMISSIONS_MUTATION} variables={{ permissions: this.state.permissions, id: this.props.user.id }}>
           {(update, { data }) => (
             <>
               <UlStyled>

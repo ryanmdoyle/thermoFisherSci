@@ -19,6 +19,8 @@ const DropdownStyled = styled.div`
 
   .dropdown__details {
     padding: 0 0 1.5rem 0;
+    transform: scale(1);
+    transition: transform 0.2s;
   }
 
   h4 {
