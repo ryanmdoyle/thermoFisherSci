@@ -84,6 +84,7 @@ type PartConnection {
 }
 
 input PartCreateInput {
+  id: ID
   partNumber: String!
   chineseLong_zh_cn: String
   chineseShort_zh_cn: String
@@ -738,6 +739,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   name: String!
   email: String!
   password: String!

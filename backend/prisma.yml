@@ -1,6 +1,7 @@
-endpoint: https://us1.prisma.sh/ryan-doyle/thermofisher-inventory/dev
+#endpoint: ${env:DB_ENDPOINT}
+endpoint: https://thermo-production-7c63fed9d5.herokuapp.com/thermo-db-prod/prod
 datamodel: datamodel.prisma
-secret: drinkingPhilzCoffee
+secret: ${env:DB_SECRET}
 
 generate:
   - generator: javascript-client
