@@ -54,6 +54,34 @@ type Mutation {
     spanishShort_es: String
   ): Part!
 
+  editPart(
+    partNumber: String!
+    chineseLong_zh_cn: String
+    chineseShort_zh_cn: String
+    chineseTLong_zh_tw: String
+    chineseTShort_zh_tw: String
+    danishLong_da: String
+    danishShort_da: String
+    dutchLong_nl: String
+    dutchShort_nl: String
+    englishLong_en: String
+    englishShort_en: String
+    frenchLong_fr: String
+    frenchShort_fr: String
+    germanLong_de: String
+    germanShort_de: String
+    italianLong_it: String
+    italianShort_it: String
+    japaneseLong_ja: String
+    japaneseShort_ja: String
+    koreanLong_ko: String
+    koreanShort_ko: String
+    portugeseLong_pt: String
+    portugeseShort_pt: String
+    spanishLong_es: String
+    spanishShort_es: String
+  ): Part!
+
   updateUserPermissions(
     id: String
     permissions: [Permission!]

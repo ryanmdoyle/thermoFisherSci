@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const marked = require('marked');
 const sanitizeHTML = require('sanitize-html');
+const fs = require('fs');
 
 require('dotenv').config();
 
@@ -53,6 +54,12 @@ const Mutations = {
       data: { ...data }
     }, info);
     return part;
+  },
+
+  async editPart(parent, args, context, info) {
+    let data = 'header1, header2, header3/ndata1, data2, data3/n';
+    const readStream = fs.createReadStream()
+    return data;
   },
 
   async login(parent, { email, password }, ctx, info) {
