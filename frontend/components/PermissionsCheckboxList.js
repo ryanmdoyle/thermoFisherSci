@@ -90,7 +90,7 @@ class PermissionsCheckboxList extends Component {
     })
   }
 
-  flash = () => {
+  flash = (ms) => {
     this.setState({
       flash: true,
     })
@@ -98,14 +98,14 @@ class PermissionsCheckboxList extends Component {
       this.setState({
         flash: false,
       })
-    }, 3000);
+    }, ms);
   }
 
   // accepts the prop 'user', which contains the user, id, name, permissons
   render() {
     return (
       <>
-        <Mutation mutation={UPDATE_PERMISSIONS_MUTATION} variables={{ permissions: this.state.permissions, id: this.props.user.id }} onCompleted={ this.flash }>
+        <Mutation mutation={UPDATE_PERMISSIONS_MUTATION} variables={{ permissions: this.state.permissions, id: this.props.user.id }} onCompleted={ () => {this.flash(3000)} }>
           {(update, { data, loading }) => (
             <>
               <UlStyled>
