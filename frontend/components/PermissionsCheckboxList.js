@@ -6,6 +6,8 @@ import gql from 'graphql-tag';
 import hasPermission from '../lib/hasPermission';
 import permissionDescription from '../lib/permissionDescription';
 
+import FlashMessage from 'react-flash-message'
+
 const UlStyled = styled.ul`
   margin-top: 0;
   border-top: 1px solid black;
@@ -72,6 +74,7 @@ class PermissionsCheckboxList extends Component {
 
   state = {
     permissions: this.props.user.permissions,
+    flash: false,
   };
 
   checkboxToggle = (e) => {
@@ -87,13 +90,23 @@ class PermissionsCheckboxList extends Component {
     })
   }
 
+  flash = () => {
+    this.setState({
+      flash: true,
+    })
+    const timer = setInterval(() => {
+      this.setState({
+        flash: false,
+      })
+    }, 3000);
+  }
+
   // accepts the prop 'user', which contains the user, id, name, permissons
   render() {
-
     return (
       <>
-        <Mutation mutation={UPDATE_PERMISSIONS_MUTATION} variables={{ permissions: this.state.permissions, id: this.props.user.id }}>
-          {(update, { data }) => (
+        <Mutation mutation={UPDATE_PERMISSIONS_MUTATION} variables={{ permissions: this.state.permissions, id: this.props.user.id }} onCompleted={ this.flash }>
+          {(update, { data, loading }) => (
             <>
               <UlStyled>
                 {possiblePermissions.map(permission => {
@@ -114,6 +127,7 @@ class PermissionsCheckboxList extends Component {
                 })}
               </UlStyled>
               <ButtonStyled onClick={() => { update() }}>Update Permissions</ButtonStyled>
+              {this.state.flash && <strong style={{ "marginLeft": "10px"} }>Updated!</strong>}
             </>
           )}
         </Mutation>
