@@ -67,8 +67,8 @@ class Part extends Component {
 
               <h2>Chinese (Taiwan) Descriptions</h2>
               <DescriptionsStyled>
-                <p>{part.taiwanShort_zh_tw}</p>
-                <MarkdownView html={part.taiwanLong_zh_tw} />
+                <p>{part.chineseShort_zh_tw}</p>
+                <MarkdownView html={part.chineseLong_zh_tw} />
               </DescriptionsStyled>
 
               <h2>Danish Descriptions</h2>
@@ -83,10 +83,10 @@ class Part extends Component {
                 <MarkdownView html={part.dutchLong_nl} />
               </DescriptionsStyled>
 
-              <h2>Frfrch Descriptions</h2>
+              <h2>French Descriptions</h2>
               <DescriptionsStyled>
-                <p>{part.frfrchShort_fr}</p>
-                <MarkdownView html={part.frfrchLong_de} />
+                <p>{part.frenchShort_fr}</p>
+                <MarkdownView html={part.frenchLong_fr} />
               </DescriptionsStyled>
 
               <h2>German Descriptions</h2>

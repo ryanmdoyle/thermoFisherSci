@@ -37,7 +37,7 @@ const PartStyled = styled.div`
     transition: width 1s;
   }
   .part-header__description {
-    width: 80%;
+    width: 70%;
     transition: width 1s;
   }
   @media screen and (max-width:600px) {
@@ -103,25 +103,27 @@ class Parts extends Component {
   render() {
     return (
       <Query query={PARTS_QUERY} variables={{ "$partNumber": "0001" }}>
-        {({ loading, data }) => {
+        {({ loading, data, error }) => {
           if (loading) return <p>Loading...</p>
+          if (error) return <p>Sorry, unable to load parts at this time.  Try again later.</p>
           return (
             <div>
               <h1>Parts</h1>
-              {data.parts.map((part, index) => (
+              {data.parts.map((part) => (
                 <div key={part.id}>
-                  <PartStyled key={part.id}>
-                    <div className='part-container'>
-                      <div className='part-header'>
-                        {/* <MarkdownView html={part.englishLong_en} /> */}
-                        <h4 className='part-header__number'>{part.partNumber}</h4>
-                        <p className='part-header__description'>{part.englishShort_en}</p>
-                        <Link href={{ pathname: '/part', query: { id: part.id } }}>
-                          <a>{part.id}</a>
-                        </Link>
-                      </div>
-                    </div>
-                  </PartStyled>
+                  <Link href={{ pathname: '/part', query: { id: part.id } }}>
+                    <a>
+                      <PartStyled key={part.id}>
+                        <div className='part-container'>
+                          <div className='part-header'>
+                            {/* <MarkdownView html={part.englishLong_en} /> */}
+                            <h4 className='part-header__number'>{part.partNumber}</h4>
+                            <p className='part-header__description'>{part.englishShort_en}</p> 
+                          </div>
+                        </div>
+                      </PartStyled>
+                    </a>
+                  </Link>
                 </div>
               ))}
             </div>
