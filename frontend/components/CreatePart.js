@@ -234,4 +234,4 @@ class CreatePart extends Component {
 }
 
 export default CreatePart;
-export { initialState };
+export { initialState, CREATE_PART_MUTATION };

@@ -3,7 +3,7 @@ import Part from '../components/Part';
 
 const part = (props) => {
   return (
-      <Part props={props}/>
+      <Part part={props}/>
   );
 };
 

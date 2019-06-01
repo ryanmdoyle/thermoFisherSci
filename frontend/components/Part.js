@@ -47,7 +47,7 @@ const SINGLE_PART_QUERY = gql`
 class Part extends Component {
   render() {
     return (
-      <Query query={SINGLE_PART_QUERY} variables={{ id: this.props.props.query.id }}>
+      <Query query={SINGLE_PART_QUERY} variables={{ id: this.props.part.query.id }}>
         {({ data: { part } }) => {
           return (
             <div>
