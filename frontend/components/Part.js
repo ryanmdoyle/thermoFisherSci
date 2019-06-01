@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import styled from 'styled-components';
 import gql from 'graphql-tag';
+import Link from 'next/link';
 
 import MarkdownView from './MarkdownView';
+import ButtonStyled from './styles/ButtonStyled';
 
 const DescriptionsStyled = styled.div`
   box-sizing: border-box;
@@ -15,6 +17,7 @@ const DescriptionsStyled = styled.div`
 const SINGLE_PART_QUERY = gql`
   query SINGLE_PART_QUERY($id: ID!) {
     part(where: { id: $id }) {
+      id
       partNumber
       chineseLong_zh_cn
       chineseShort_zh_cn
@@ -52,6 +55,9 @@ class Part extends Component {
           return (
             <div>
               <h1>{`Part - ${part.partNumber}`}</h1>
+              <Link href={{ pathname: '/editPart', query: { id: part.id } }}>
+                <a>Edit Part</a>
+              </Link>
               <hr></hr>
               <h2>English Descriptions</h2>
               <DescriptionsStyled>
@@ -132,3 +138,4 @@ class Part extends Component {
 }
 
 export default Part;
+export { SINGLE_PART_QUERY };

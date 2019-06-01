@@ -3,7 +3,7 @@ import EditPart from '../components/EditPart';
 
 const editPart = (props) => {
   return (
-    <EditPart part={props}/>
+    <EditPart page={props}/>
   );
 };
 

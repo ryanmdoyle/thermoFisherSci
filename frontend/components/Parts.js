@@ -24,6 +24,10 @@ const PartStyled = styled.div`
     transition: transform 0.2s;
   }
 
+  p, h4 {
+    color: ${props => props.theme.black};
+  }
+
   h4 {
     margin: 0 0;
     padding: 1rem 0;

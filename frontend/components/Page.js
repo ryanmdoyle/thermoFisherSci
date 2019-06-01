@@ -42,6 +42,9 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.5rem;
     font-weight: 300;
   }
+  a {
+    text-decoration: none;
+  }
 `;
 
 const StyledPage = styled.div`

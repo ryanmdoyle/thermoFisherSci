@@ -6,7 +6,7 @@ import sanitize from 'sanitize-html';
 import styled from 'styled-components';
 import Router from 'next/router';
 
-import { PARTS_QUERY } from './Parts';
+import { SINGLE_PART_QUERY } from './Part';
 import FormStyle from './styles/FormStyle';
 import createDescription from '../lib/createDescription';
 import User from './User';
@@ -82,13 +82,21 @@ class EditPart extends Component {
   }
 
   render() {
+    console.log(this.props.page.query.id)
     return (
-      <p>hello!{console.log(this.props.part.query.id)}</p>
-      // <User>
-      //   {({ data: { me } }) => (
-      //     // <Query query={PARTS_QUERY} variable={}> 
-      //     // {/* { for the variable lace the part rounte number} */}
-      //     // </Query>
+      <User>
+        {({ data: { me } }) => (
+          <Query query={SINGLE_PART_QUERY} variables={{ id: this.props.page.query.id }}> 
+            {({data}) => {
+              console.log(data)
+              return (
+                <>
+                  <h1>Edit Part - {data.part.partNumber}</h1>
+                  <p>iterate through the data and pre-fill form/state</p>
+                </>
+              )
+            }}
+          </Query>
       //     <Mutation mutation={CREATE_PART_MUTATION} variables={this.state} refetchQueries={[{ query: PARTS_QUERY }]}>
       //       {(createPart, { loading, error }) => {
       //         if (loading) return <p>Loading...</p>
@@ -171,8 +179,8 @@ class EditPart extends Component {
       //         )
       //       }}
       //     </Mutation>
-      //   )}
-      // </User>
+        )}
+      </User>
     );
   }
 }
