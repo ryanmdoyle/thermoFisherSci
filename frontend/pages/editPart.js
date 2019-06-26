@@ -1,9 +1,9 @@
 import React from 'react';
-import EditPart from '../components/EditPart';
+import UpdatePart from '../components/UpdatePart';
 
 const editPart = (props) => {
   return (
-    <EditPart page={props}/>
+    <UpdatePart page={props} />
   );
 };
 

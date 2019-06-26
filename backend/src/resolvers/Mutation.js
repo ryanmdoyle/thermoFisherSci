@@ -30,7 +30,6 @@ const Mutations = {
   async updateUserPermissions(parent, args, ctx, info) {
     const { permissions } = args;
     const userId = ctx.req.userId;
-    console.log(permissions);
     const updatedUser = await ctx.db.mutation.updateUser(
       {
         data: { permissions: { set: permissions } },
@@ -56,10 +55,13 @@ const Mutations = {
     return part;
   },
 
-  async editPart(parent, args, context, info) {
-    let data = 'header1, header2, header3/ndata1, data2, data3/n';
-    const readStream = fs.createReadStream()
-    return data;
+  async updatePart(parent, args, context, info) {
+    const partData = { ...args };
+    delete partData.id; //deletes the id from the data to use for the GQL updatePart argument
+    const partId = args.id;
+    const updatedPart = await context.db.mutation.updatePart({ data: { ...partData }, where: { id: partId } })
+    console.log(updatedPart);
+    return updatedPart;
   },
 
   async login(parent, { email, password }, ctx, info) {
@@ -77,7 +79,6 @@ const Mutations = {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 31,
     });
-    console.log(user);
     return user;
   },
 

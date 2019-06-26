@@ -54,7 +54,7 @@ type Mutation {
     spanishShort_es: String
   ): Part!
 
-  editPart(
+  updatePart(
     partNumber: String!
     chineseLong_zh_cn: String
     chineseShort_zh_cn: String
@@ -80,6 +80,7 @@ type Mutation {
     portugeseShort_pt: String
     spanishLong_es: String
     spanishShort_es: String
+    id: String!
   ): Part!
 
   updateUserPermissions(
