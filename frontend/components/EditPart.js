@@ -83,15 +83,15 @@ class EditPart extends Component {
   }
 
   render() {
-    console.log(this.props.page.query.id)
+    // console.log(this.props.page.query.id)
     return (
       <User>
         {({ data: { me } }) => (
-          <Query query={SINGLE_PART_QUERY} variables={{ id: this.props.page.query.id }}> 
-            {({data}) => {
+          <Query query={SINGLE_PART_QUERY} variables={{ id: this.props.page.query.id }}>
+            {({ data }) => {
               return (
                 <Mutation mutation={EDIT_PART_MUTATION} variables={this.state} refetchQueries={[{ query: PARTS_QUERY }]}>
-                {(createPart, { loading, error }) => {
+                  {(createPart, { loading, error }) => {
                     if (loading) return <p>Loading...</p>
                     return (
                       <React.Fragment>
@@ -111,13 +111,13 @@ class EditPart extends Component {
                             <>
                               <label htmlFor='partNumber'>
                                 Part Number
-                        </label>
+                              </label>
                               <input
                                 type='text'
                                 name='partNumber'
                                 key='partNumber'
                                 placeholder='partNumber'
-                                value={this.state.partNumber}
+                                defaultValue={data.part.partNumber}
                                 onChange={this.saveToState}
                               />
                               <hr style={{ margin: '2rem 4rem 1rem 4rem' }}></hr>
@@ -138,7 +138,7 @@ class EditPart extends Component {
                                     type='text'
                                     name={fieldName}
                                     placeholder={fieldName}
-                                    value={this.state[key]}
+                                    defaultValue={data.part[key]}
                                     onChange={this.saveToState}
                                   />
                                 }
@@ -148,7 +148,7 @@ class EditPart extends Component {
                                       type='text'
                                       name={fieldName}
                                       placeholder={fieldName}
-                                      value={this.state[fieldName]}
+                                      defaultValue={data.part[fieldName]}
                                       onChange={this.saveToState}
                                     />
                                     {this.state[fieldName] && (
