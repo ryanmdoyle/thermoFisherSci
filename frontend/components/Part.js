@@ -73,8 +73,8 @@ class Part extends Component {
 
               <h2>Chinese (Taiwan) Descriptions</h2>
               <DescriptionsStyled>
-                <p>{part.chineseShort_zh_tw}</p>
-                <MarkdownView html={part.chineseLong_zh_tw} />
+                <p>{part.chineseTShort_zh_tw}</p>
+                <MarkdownView html={part.chineseTLong_zh_tw} />
               </DescriptionsStyled>
 
               <h2>Danish Descriptions</h2>
