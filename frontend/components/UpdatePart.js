@@ -88,7 +88,10 @@ class UpdatePart extends Component {
       <User>
         {({ data: { me } }) => (
           <Query query={SINGLE_PART_QUERY} variables={{ id: this.props.page.query.id }}>
-            {({ data }) => {
+            {({ data, loading, error }) => {
+              if (loading) return <p>Loading...</p>
+              if (error) return <p>Sorry, there is no part with the ID {this.props.page.query.id}</p>
+              if (!data.part) return <p>Sorry, there is no part with the ID {this.props.page.query.id}</p>
               return (
                 <Mutation mutation={UPDATE_PART_MUTATION} variables={this.state} refetchQueries={[{ query: PARTS_QUERY }]}>
                   {(editPart, { loading, error }) => {
@@ -112,7 +115,7 @@ class UpdatePart extends Component {
                             }
                           }
                         >
-                          {hasPermission(me, 'CREATE') && (
+                          {hasPermission(me, 'UPDATE') && (
                             <>
                               <label htmlFor='partNumber'>
                                 Part Number
