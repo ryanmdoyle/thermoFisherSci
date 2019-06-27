@@ -59,10 +59,8 @@ const PartStyled = styled.div`
 
 const PARTS_QUERY = gql`
 
-  query($partNumber: String) {
-    parts(
-      where: {partNumber_contains: $partNumber}
-    ) {
+  query {
+    parts(orderBy: partNumber_ASC) {
       id
       partNumber
       chineseLong_zh_cn
@@ -106,7 +104,7 @@ class Parts extends Component {
 
   render() {
     return (
-      <Query query={PARTS_QUERY} variables={{ "$partNumber": "0001" }}>
+      <Query query={PARTS_QUERY}>
         {({ loading, data, error }) => {
           if (loading) return <p>Loading...</p>
           if (error) return <p>Sorry, unable to load parts at this time.  Try again later.</p>
