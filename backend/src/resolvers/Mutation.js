@@ -58,9 +58,13 @@ const Mutations = {
   async updatePart(parent, args, context, info) {
     const partData = { ...args };
     delete partData.id; //deletes the id from the data to use for the GQL updatePart argument
+    await Object.keys(partData).forEach(key => {
+      if (partData[key] === "") {
+        delete partData[key]; // deletes the blank keys (blank keys from no-edits coming from front end state)
+      }
+    })
     const partId = args.id;
     const updatedPart = await context.db.mutation.updatePart({ data: { ...partData }, where: { id: partId } })
-    console.log(updatedPart);
     return updatedPart;
   },
 
